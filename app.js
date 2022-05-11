@@ -20,6 +20,14 @@ app.get('/sign_in',(req,res) => {
     res.render('sign_in')
 })
 
+app.get('/log_in',(req,res) => {
+    res.render('log_in')
+})
+
+app.get('/record',(req,res) => {
+    res.render('record')
+})
+
 app.listen(port,() => {
     console.log(`Express is running on http://localhost:${port}`)
 })
