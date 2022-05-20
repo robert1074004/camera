@@ -1,13 +1,14 @@
-const camera_list = [{'相機':[{'name':'Canon 90D','image':'/images/Canon90D.jpg','price':1000,'id':0,},{'name':'Canon R5','image':'/images/CanonR5.jpg','price':1500,'id':1},{'name':'Canon 850D','image':'/images/Canon850D.jpg','price':500,'id':2}]}]
+const cameraList = [{'相機':[{'name':'Canon 90D','image':'/images/Canon90D.jpg','price':1000,'id':0,},{'name':'Canon R5','image':'/images/CanonR5.jpg','price':1500,'id':1},{'name':'Canon 850D','image':'/images/Canon850D.jpg','price':500,'id':2}]}]
 
-let status = {}
 
 const express = require('express')
 const app = express()
 const port =3000
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://root:abc83213@learning.lmzd7.mongodb.net/camera?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+const Camera = require('./models/camera')
 
 const db = mongoose.connection
 
@@ -23,12 +24,14 @@ app.set('view engine','handlebars')
 
 app.use(express.static('public'))
 
+app.use(bodyParser.urlencoded({extended:true}))
+
 app.get('/',(req,res) => {
-    res.render('index',{camera_list:camera_list[0].相機})
+    res.render('index',{cameraList:cameraList[0].相機})
 })
 
 app.get('/show/:categoryID',(req,res) => {
-    const category = camera_list[0].相機[Number(req.params.categoryID)]
+    const category = cameraList[0].相機[Number(req.params.categoryID)]
     res.render('show',{category})
 })
 
@@ -36,12 +39,48 @@ app.get('/sign_in',(req,res) => {
     res.render('sign_in')
 })
 
+app.get('/member_error',(req,res) => {
+    res.render('member_error')
+})
+
+app.post('/sign_in',(req,res) => {
+    const {name,account,email,password} = req.body
+    Camera.find()
+          .lean()
+          .then(cameras => { 
+              let repeat = cameras.some(camera => camera.name === name || camera.account === account || camera.email === email || camera.password === password)
+                if (repeat) {
+                    res.redirect('/member_error')
+                } else {
+                    return Camera.create({ name,account,email,password })     
+                        .then(() => res.redirect('/')) 
+                        .catch(error => console.log(error))
+                }
+        }) 
+         .catch(error => console.log(error))
+})
+
 app.get('/log_in',(req,res) => {
     res.render('log_in')
 })
 
+app.post('/log_in',(req,res) => {
+    const {account,password} = req.body
+    Camera.find()
+          .lean()
+          .then(cameras => { 
+              let sucess = cameras.some(camera =>  camera.account === account && camera.password === password)
+                if (sucess) {
+                    res.redirect('/')
+                } else {
+                    res.redirect('/member_error')
+                }
+        }) 
+         .catch(error => console.log(error))
+})
+
 app.get('/error/:categoryID',(req,res) => {
-    const category = camera_list[0].相機[Number(req.params.categoryID)]
+    const category = cameraList[0].相機[Number(req.params.categoryID)]
     res.render('error',{category})
 })
 
@@ -52,7 +91,7 @@ app.get('/record/:categoryID',(req,res) => {
     if ((myDate-now)/(1000 * 60 * 60 * 24) < 1) {
         res.redirect('/error/'+categoryid)
     } else {
-        const category = camera_list[0].相機[Number(req.params.categoryID)]
+        const category = cameraList[0].相機[Number(req.params.categoryID)]
         res.render('record')
     }
     
