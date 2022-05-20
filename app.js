@@ -39,18 +39,22 @@ app.get('/sign_in',(req,res) => {
     res.render('sign_in')
 })
 
-app.get('/member_error',(req,res) => {
-    res.render('member_error')
+app.get('/member_error/:error',(req,res) => {
+    const error = {error:req.params.error}
+    res.render('member_error',{error})
 })
 
 app.post('/sign_in',(req,res) => {
     const {name,account,email,password} = req.body
+    if (name.trim() === '' || account.trim() === '' || email.trim() === '' || password.trim() === '' ) {
+        res.redirect('/member_error/註冊的資料不得為空白')
+    }
     Camera.find()
           .lean()
           .then(cameras => { 
               let repeat = cameras.some(camera => camera.name === name || camera.account === account || camera.email === email || camera.password === password)
                 if (repeat) {
-                    res.redirect('/member_error')
+                    res.redirect('/member_error/註冊的資料已被別人使用')
                 } else {
                     return Camera.create({ name,account,email,password })     
                         .then(() => res.redirect('/')) 
@@ -73,7 +77,7 @@ app.post('/log_in',(req,res) => {
                 if (sucess) {
                     res.redirect('/')
                 } else {
-                    res.redirect('/member_error')
+                    res.redirect('/member_error/帳號或密碼錯誤')
                 }
         }) 
          .catch(error => console.log(error))
