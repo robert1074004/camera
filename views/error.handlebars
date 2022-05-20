@@ -6,11 +6,8 @@
         <div class="card-body">
             <h5 class="card-title">{{category.name}}</h5>
             <img src="{{category.image}}" width="120" length="120"  alt="..." class="mx-auto">
-            <form action="/record/{{category.id}}">
-                <p class="card-text mt-2">取貨日期需與今天相隔一天</p>
-                <input type="datetime-local" name="time" required>
-                <button type="submit" class="btn btn-secondary btn-sm">確定日期</button>
-            </form>   
+                <h5 class="text-danger fw-bold mt-2">無法送出，日期選擇錯誤</h5>
+                 <a href = '/show/{{category.id}}' class = 'btn btn-primary '>返回</a>
         </div>
 
     </div>
