@@ -1,13 +1,13 @@
 <container>
     <div class="row row-cols-3 mx-auto mt-3" style="width: 800px" id="camera_pannel">
-        {{#each cameraList}}
+        {{#each cameras}}
         <div class="col mb-3">
             <div class="card border border-dark border-2">
                 <img src="{{this.image}}" width="120" height="120" alt="..." class="mx-auto">
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">{{this.name}}</h5>
                     <p class="card-text"> $NT {{this.price}} / 1天</p>
-                    <a href="/show/{{this.id}}" class="btn btn-primary" >
+                    <a href="/show/{{this._id}}" class="btn btn-primary" >
                         租借{{this.name}}
                     </a>   
                 </div>

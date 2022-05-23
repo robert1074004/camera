@@ -1,4 +1,3 @@
-const cameraList = [{'相機':[{'name':'Canon 90D','image':'/images/Canon90D.jpg','price':1000,'id':0,},{'name':'Canon R5','image':'/images/CanonR5.jpg','price':1500,'id':1},{'name':'Canon 850D','image':'/images/Canon850D.jpg','price':500,'id':2}]}]
 
 
 const express = require('express')
@@ -8,6 +7,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://root:abc83213@learning.lmzd7.mongodb.net/camera?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+const User = require('./models/user')
 const Camera = require('./models/camera')
 
 const db = mongoose.connection
@@ -27,12 +27,17 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:true}))
 
 app.get('/',(req,res) => {
-    res.render('index',{cameraList:cameraList[0].相機})
+    Camera.find()
+          .lean()
+          .then(cameras =>  res.render('index',{cameras}))
+          .catch(error => console.log('error'))
 })
 
 app.get('/show/:categoryID',(req,res) => {
-    const category = cameraList[0].相機[Number(req.params.categoryID)]
-    res.render('show',{category})
+    const categoryid = req.params.categoryID
+    Camera.findById(categoryid)
+          .lean()
+          .then(camera => res.render('show',{camera}))   
 })
 
 app.get('/sign_in',(req,res) => {
@@ -49,14 +54,14 @@ app.post('/sign_in',(req,res) => {
     if (name.trim() === '' || account.trim() === '' || email.trim() === '' || password.trim() === '' ) {
         res.redirect('/member_error/註冊的資料不得為空白')
     }
-    Camera.find()
+    User.find()
           .lean()
-          .then(cameras => { 
-              let repeat = cameras.some(camera => camera.name === name || camera.account === account || camera.email === email || camera.password === password)
+          .then(users => { 
+              let repeat = users.some(user => user.name === name || user.account === account || user.email === email || user.password === password)
                 if (repeat) {
                     res.redirect('/member_error/註冊的資料已被別人使用')
                 } else {
-                    return Camera.create({ name,account,email,password })     
+                    return User.create({ name,account,email,password })     
                         .then(() => res.redirect('/')) 
                         .catch(error => console.log(error))
                 }
@@ -70,10 +75,10 @@ app.get('/log_in',(req,res) => {
 
 app.post('/log_in',(req,res) => {
     const {account,password} = req.body
-    Camera.find()
+    User.find()
           .lean()
-          .then(cameras => { 
-              let sucess = cameras.some(camera =>  camera.account === account && camera.password === password)
+          .then(users => { 
+              let sucess = users.some(user =>  user.account === account && user.password === password)
                 if (sucess) {
                     res.redirect('/')
                 } else {
@@ -84,8 +89,10 @@ app.post('/log_in',(req,res) => {
 })
 
 app.get('/error/:categoryID',(req,res) => {
-    const category = cameraList[0].相機[Number(req.params.categoryID)]
-    res.render('error',{category})
+    const categoryid = req.params.categoryID
+    Camera.findById(categoryid)
+          .lean()
+          .then(camera => res.render('error',{camera}))
 })
 
 app.get('/record/:categoryID',(req,res) => {
@@ -95,10 +102,10 @@ app.get('/record/:categoryID',(req,res) => {
     if ((myDate-now)/(1000 * 60 * 60 * 24) < 1) {
         res.redirect('/error/'+categoryid)
     } else {
-        const category = cameraList[0].相機[Number(req.params.categoryID)]
-        res.render('record')
-    }
-    
+        Camera.findById(categoryid)
+          .lean()
+          .then(camera => res.render('record'))   
+    }   
 })
 
 app.get('/record',(req,res) => {
