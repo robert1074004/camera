@@ -40,5 +40,10 @@ router.post('/log_in',passport.authenticate('local',{
     faliureRedirect:'/users/log_in'
 }))
 
+router.get('/logout',(req,res) => {
+    req.logout()
+    res.redirect('/users/log_in')
+})
+
 
 module.exports = router
