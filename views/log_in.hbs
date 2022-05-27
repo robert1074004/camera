@@ -1,4 +1,4 @@
-<container>
+{{!-- <container>
     <div class="card text-center mx-auto my-5" style="width : 450px;">
         <div class="card-header">
             <h4>TWT</h4>
@@ -21,4 +21,25 @@
             </form>
         </div>
     </div>
-</container>
+</container> --}}
+<div class="row mt-5">
+  <div class="col-md-4 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mt-3">Login</h1>
+      <form action="/users/log_in" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+        </div>
+        <div class="form-group my-3">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+      <p class="lead mt-4">
+        No Account? <a href="/users/sign_up">Register</a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -4,11 +4,11 @@ const User = require('../../models/user')
 
 
 
-router.get('/sign_in',(req,res) => {
-    res.render('sign_in')
+router.get('/sign_up',(req,res) => {
+    res.render('sign_up')
 })
 
-router.post('/sign_in',(req,res) => {
+router.post('/sign_up',(req,res) => {
     const {name,account,email,password} = req.body
     if (name.trim() === '' || account.trim() === '' || email.trim() === '' || password.trim() === '' ) {
         res.redirect('/member_error/註冊的資料不得為空白')

@@ -1,0 +1,66 @@
+{{!-- <container>
+    <div class="card text-center mx-auto my-5" style="width : 600px;">
+        <div class="card-header">
+            <h4>加入會員</h4>
+        </div>
+        <div class="card-body">
+            <form action="/users/sign_in" method="POST">
+                <div class="row mb-3">
+                    <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="name"id="inputName3" name="name" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputemail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" placeholder="email" id="inputemail3" name="email" required> 
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputpassword3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputpassword3" placeholder="password" name="password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputConfirmPassword3" class="col-sm-2 col-form-label">Confirm Password</label>
+                    
+                        <input type="password" class="form-control" id="inputConfirmPassword3" placeholder="Confirm Password" name="ConfirmPassword" required>
+                    
+                </div>
+                <button type="submit" class="btn btn-secondary btn-lg">註冊</button>
+            </form>
+        </div>
+    </div>
+</container> --}}
+<div class="row mt-5">
+  <div class="col-md-4 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mt-3">Register</h1>
+      <form action="/users/sign_up" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
+        </div>
+        <div class="form-group my-3">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+        </div>
+        <div class="form-group my-3">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+            placeholder="Confirm Password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+      </form>
+      <p class="lead mt-4">
+        Have An Account? <a href="/users/log_in">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
