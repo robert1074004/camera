@@ -9,23 +9,25 @@ router.get('/sign_up',(req,res) => {
 })
 
 router.post('/sign_up',(req,res) => {
-    const {name,account,email,password} = req.body
-    if (name.trim() === '' || account.trim() === '' || email.trim() === '' || password.trim() === '' ) {
-        res.redirect('/member_error/註冊的資料不得為空白')
-    }
-    User.find()
-          .lean()
-          .then(users => { 
-              let repeat = users.some(user => user.name === name || user.account === account || user.email === email || user.password === password)
-                if (repeat) {
-                    res.redirect('/member_error/註冊的資料已被別人使用')
-                } else {
-                    return User.create({ name,account,email,password })     
-                        .then(() => res.redirect('/')) 
-                        .catch(error => console.log(error))
-                }
-        }) 
-         .catch(error => console.log(error))
+    const {name,email,password,confirmPassword} = req.body
+    // if (name.trim() === '' || account.trim() === '' || email.trim() === '' || password.trim() === '' ) {
+    //     res.redirect('/member_error/註冊的資料不得為空白')
+    // }
+    User.findOne({email}).then(user => {
+        if (user) {
+            console.log('User already exists.')
+            res.render('sign_up',{name,email,password,confirmPassword})
+        } else {
+            return User.create({
+                name,
+                email,
+                password
+            })
+                .then(() => res.redirect('/'))
+                .catch(err => console.log(err))
+        }
+    })
+    .catch(err => console.log(err))
 })
 
 router.get('/log_in',(req,res) => {
