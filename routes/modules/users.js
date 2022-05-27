@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('passport')
 const router = express.Router()
 const User = require('../../models/user')
 
@@ -34,20 +35,10 @@ router.get('/log_in',(req,res) => {
     res.render('log_in')
 })
 
-router.post('/log_in',(req,res) => {
-    const {account,password} = req.body
-    User.find()
-          .lean()
-          .then(users => { 
-              let sucess = users.some(user =>  user.account === account && user.password === password)
-                if (sucess) {
-                    res.redirect('/')
-                } else {
-                    res.redirect('/member_error/帳號或密碼錯誤')
-                }
-        }) 
-         .catch(error => console.log(error))
-})
+router.post('/log_in',passport.authenticate('local',{
+    successRedirect:'/',
+    faliureRedirect:'/users/log_in'
+}))
 
 
 module.exports = router

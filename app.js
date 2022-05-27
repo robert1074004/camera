@@ -4,6 +4,7 @@ const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 const app = express()
 const port =3000
 if (process.env.NODE_ENV !== 'production') {
@@ -23,6 +24,8 @@ app.use(session({
 app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({extended:true}))
+
+usePassport(app)
 
 app.use(routes)
 
