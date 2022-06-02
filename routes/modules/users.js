@@ -36,7 +36,7 @@ router.post('/sign_up',(req,res) => {
 
 router.post('/log_in',passport.authenticate('local',{
     successRedirect:'/',
-    faliureRedirect:'/users/log_in'
+    failureRedirect:'users/log_in'
 }))
 
 router.get('/log_in',(req,res) => {

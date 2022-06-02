@@ -6,16 +6,18 @@ const bodyParser = require('body-parser')
 const routes = require('./routes')
 const app = express()
 const port =3000
-console.log(process.env)
+
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
+    require('dotenv').config({ override: true })
   }
 require('./config/mongoose')
+
+console.log(process.env)
 
 app.engine('hbs',exphbs({defaultLayout:'main',extname:'.hbs'}))
 app.set('view engine','hbs')
 
-const usePassport = require('./config/passport')
+
 
 app.use(session({
     secret:'ThisIsMySecret',
@@ -23,7 +25,7 @@ app.use(session({
     saveUninitialized:true
 }))
 
-
+const usePassport = require('./config/passport')
 
 app.use(express.static('public'))
 
