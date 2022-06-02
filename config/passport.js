@@ -1,6 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const User = require('../models/User')
+const User = require('../models/user')
 module.exports = app => {
     app.use(passport.initialize())
     app.use(passport.session())
@@ -8,7 +8,6 @@ module.exports = app => {
         User.findOne({email})
                 .then(user => {
                     if (!user) {
-                        console.log('no')
                         return done(null,false,{message:'That email is not registered'})
                     }
                     if (user.password !== password) {
