@@ -11,11 +11,6 @@ router.get('/',(req,res) => {
 
 
 
-router.get('/member_error/:error',(req,res) => {
-    const error = {error:req.params.error}
-    res.render('member_error',{error})
-})
-
 
 
 
