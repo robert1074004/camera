@@ -16,6 +16,16 @@ const recordSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-      }
+      },
+    status : {
+        type:String,
+        default: 'reserve'
+    },
+    userId:{
+        type:Schema.Types.ObjectId,
+        ref: 'User',
+        index:true,
+        required:true
+    }
 })
 module.exports = mongoose.model('record', recordSchema)

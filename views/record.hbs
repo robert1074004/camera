@@ -4,27 +4,16 @@
             <div class="list-group-item list-group-item-action active text-center">
                 <h5>你的租借紀錄</h5>
             </div>
-            <div class="list-group-item list-group-item-action list-group-item-danger text-center" aria-current="true">
-                <h5 class="mb-1">Cannon 90D</h5>
-                <p class="mb-1">逾期3天，請盡速歸還</p>
-                <small>借出日期: 2022/5/11</small>
+            {{# each record}}
+            <div class="list-group-item list-group-item-action list-group-item text-center" aria-current="true">
+                <h5 >租借器材 : {{this.name}}</h5>
+                <p class="my-2">請依預借日期前往實體店面租借</p>
+                <small>預借日期: {{this.time}}</small>
+                <p class="my-2"><strong>器材現況: {{this.status}}</strong></p> 
             </div>
-            <div class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
-            </div>
-            <div class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
-            </div>
+            {{/each}}
+            
+            
         </div>
     </div>
 </main>

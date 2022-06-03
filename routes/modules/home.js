@@ -18,8 +18,6 @@ router.get('/member_error/:error',(req,res) => {
 
 
 
-router.get('/record',(req,res) => {
-    res.render('record')
-})
+
 
 module.exports = router
