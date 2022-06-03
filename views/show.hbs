@@ -6,7 +6,7 @@
         <div class="card-body">
             <h5 class="card-title">{{camera.name}}</h5>
             <img src="{{camera.image}}" width="120" length="120"  alt="..." class="mx-auto">
-            <form action="/cameras/record/{{camera._id}}">
+            <form action="/records/{{camera._id}}">
                 <p class="card-text mt-2">取貨日期需與今天相隔一天</p>
                 <input type="datetime-local" name="time" required>
                 <button type="submit" class="btn btn-secondary btn-sm">確定日期</button>
