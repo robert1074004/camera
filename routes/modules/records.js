@@ -5,7 +5,6 @@ const Camera = require('../../models/camera')
 
 router.get('/show/:category',(req,res) => {
     const category = req.params.category
-    console.log(category)
     Camera.findOne({name:category})
           .lean()
           .then(camera => res.render('show',{camera}))   
@@ -15,7 +14,6 @@ router.post('/show/:category',(req,res) => {
     const errors = []
     const category = req.params.category
     const now = new Date()
-    console.log(req.body.time)
     const time = req.body.time
     const userId = req.user._id
     const email = req.user.email
@@ -47,8 +45,8 @@ router.get('/',(req,res) => {
     records.find({userId})
         .lean()
         .sort({_id:'asc'})
-        .then(record => {console.log(record)
-            res.render('record',{record})})
+        .then(record => 
+            res.render('record',{record}))
         .catch(error => console.error(error))
 })
 
