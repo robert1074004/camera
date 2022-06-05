@@ -1,0 +1,17 @@
+#record_pannel{
+    width:360px;
+}
+#camera_pannel{
+    display:column;
+    width:auto;
+}
+#category_pannel{
+    width:auto;
+}
+#username{
+    display:none;
+}
+@media screen and (min-width:480px) {#record_pannel{width:500px;}} 
+@media screen and (min-width:480px) {#camera_pannel{display:flex;width:800px;}}
+@media screen and (min-width:480px) {#category_pannel{width:600px;}}
+@media screen and (min-width:480px) {#username{display:block;}}   

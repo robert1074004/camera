@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camera rent</title>
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+  <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 
 <body>
@@ -42,7 +43,7 @@
               <a class="nav-link" href="/users/logout">登出</a>
             </li> 
           </ul>
-          <h5 class="mb-0 me-5">歡迎，{{ user.name}}</h5>
+          <h5 class="mb-0 me-5" id="username">歡迎，{{ user.name}}</h5>
           {{/if}}
         </div>
       </div>
