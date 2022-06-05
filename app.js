@@ -10,7 +10,7 @@ const app = express()
 
 
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({ override: true })
+    require('dotenv').config()
   }
 console.log(process.env)
 require('./config/mongoose')
