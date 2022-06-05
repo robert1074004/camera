@@ -7,7 +7,7 @@ const routes = require('./routes')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
 const app = express()
-const port =3000
+
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config({ override: true })
@@ -48,6 +48,6 @@ app.use((req, res, next) => {
 app.use(routes)
 
 
-app.listen(port,() => {
-    console.log(`Express is running on http://localhost:${port}`)
+app.listen(process.env.port,() => {
+    console.log(`Express is running on http://localhost:${process.env.port}`)
 })
