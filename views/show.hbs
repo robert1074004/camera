@@ -13,12 +13,18 @@
             <img src="{{camera.image}}" width="120" length="120"  alt="..." class="mx-auto">
             <form action="/records/show/{{camera.name}}" method="POST">
                 <p class="card-text my-2"> $NT {{camera.price}} / 1天</p>
+                {{#if error}}
+                <h5 class="card-title mb-2">目前無庫存</h5>
+                <a class="btn btn-primary" href="/{{camera.category}}">返回</a>
+                {{else}}
                 <div class="form-group mb-3">
                 <label for="storage">租借數量(目前庫存 : {{camera.quantity}})</label>
                 <input name="quantity" id="storage" type="number"max="{{camera.quantity}}" min = '1'style="width:80px;height:30px;display:inline-block;" class="form-control ms-2" required>
                 </div>
                 <input type="datetime-local" name="time" class="mb-2" required>
                 <button type="submit" class="btn btn-secondary btn-sm">確定日期</button>
+                {{/if}}
+                
             </form>   
         </div>
 

@@ -7,7 +7,12 @@ router.get('/show/:category',(req,res) => {
     const category = req.params.category
     Camera.findOne({name:category})
           .lean()
-          .then(camera => res.render('show',{camera}))   
+          .then(camera => {
+              if (!camera.quantity) {
+                return res.render('show',{camera,error:'目前無庫存'})
+              }
+              return res.render('show',{camera})
+            })   
 })
 
 router.post('/show/:category',(req,res) => {
@@ -21,7 +26,6 @@ router.post('/show/:category',(req,res) => {
     const myDate = new Date(req.body.time)
     if ((myDate-now)/(1000 * 60 * 60 * 24) < 1) {
         errors.push({message:'日期選擇錯誤'})
-       
     }
     Camera.findOne({name:category}).then(camera => {
         if (!camera.quantity) {

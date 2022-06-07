@@ -47,7 +47,7 @@ router.get('/log_in',(req,res) => {
 })
 
 router.post('/log_in',passport.authenticate('local',{
-    successRedirect:'/',
+    successRedirect:'/SLRcamera',
     failureRedirect:'users/log_in'
 }))
 
