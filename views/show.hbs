@@ -1,12 +1,12 @@
 <div class="container-sm">
     <div class="card text-center mx-auto my-5" id="category_pannel">
         <div class="card-header">
-            <h4>選擇取貨日期</h4>
+            <h4>選擇預借日期</h4>
         </div>
         <div class="card-body">
             {{> message}}
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                取貨日期需與今天相隔一天
+                預借日期需與今天相隔一天
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <h5 class="card-title">{{camera.name}}</h5>
@@ -15,7 +15,7 @@
                 <p class="card-text my-2"> $NT {{camera.price}} / 1天</p>
                 <div class="form-group mb-3">
                 <label for="storage">租借數量(目前庫存 : {{camera.quantity}})</label>
-                <input name="quantity" id="storage" type="number"max="3" min = '1'style="width:80px;height:30px;display:inline-block;" class="form-control ms-2" required>
+                <input name="quantity" id="storage" type="number"max="{{camera.quantity}}" min = '1'style="width:80px;height:30px;display:inline-block;" class="form-control ms-2" required>
                 </div>
                 <input type="datetime-local" name="time" class="mb-2" required>
                 <button type="submit" class="btn btn-secondary btn-sm">確定日期</button>
