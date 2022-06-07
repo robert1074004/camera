@@ -16,6 +16,10 @@ const cameraSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
     }
 })
 module.exports = mongoose.model('Camera', cameraSchema)

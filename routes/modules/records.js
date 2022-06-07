@@ -15,6 +15,7 @@ router.post('/show/:category',(req,res) => {
     const category = req.params.category
     const now = new Date()
     const time = req.body.time
+    const quantity = Number(req.body.quantity)
     const userId = req.user._id
     const email = req.user.email
     const myDate = new Date(req.body.time)
@@ -22,17 +23,22 @@ router.post('/show/:category',(req,res) => {
         errors.push({message:'日期選擇錯誤'})
        
     }
-    records.findOne({name:category}).then(record => {
-        if (record) {
-            errors.push({message:'這個器材已經被預約了'})
+    Camera.findOne({name:category}).then(camera => {
+        if (!camera.quantity) {
+            errors.push({message:'這個器材已經沒有庫存'})
         }
         if (errors.length) {
             Camera.findOne({name:category})
             .lean()
             .then(camera => res.render('show',{camera,errors}))
         } else {
-            return records.create({name:category,email,time,userId})
-            .then(() => res.redirect('/records/'))
+            return records.create({name:category,email,time,userId,quantity})
+            .then(() => Camera.findOne({name:category}).then(camera => {
+                camera.quantity -= quantity
+                return camera.save()
+                .then(() => res.redirect('/records/'))
+                .catch(err => console.log(err))
+            }))
             .catch(err => console.log(err))
         }
         
