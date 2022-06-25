@@ -1,5 +1,5 @@
 <div class="container-sm">
-    <div class="card text-center mx-auto my-5" id="category_pannel">
+    <div class="card text-center mx-auto my-5 border border-2 border-dark" id="category_pannel">
         <div class="card-header">
             <h4>選擇預借日期</h4>
         </div>
@@ -22,7 +22,7 @@
                 <input name="quantity" id="storage" type="number"max="{{camera.quantity}}" min = '1'style="width:80px;height:30px;display:inline-block;" class="form-control ms-2" required>
                 </div>
                 <input type="datetime-local" name="time" class="mb-2" required>
-                <button type="submit" class="btn btn-secondary btn-sm">確定日期</button>
+                <button type="submit" class="btn btn-primary btn-sm">確定日期</button>
                 {{/if}}
                 
             </form>   
