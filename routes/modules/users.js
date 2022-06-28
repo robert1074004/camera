@@ -44,11 +44,14 @@ router.post('/sign_up',(req,res) => {
 
 router.get('/log_in',(req,res) => {
     res.render('log_in')
+    let empty = []
+    req.session.messages = empty
 })
 
 router.post('/log_in',passport.authenticate('local',{
     successRedirect:'/SLRcamera',
-    failureRedirect:'users/log_in'
+    failureRedirect:'users/log_in',
+    failureMessage:true
 }))
 
 router.get('/logout',(req,res) => {
