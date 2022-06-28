@@ -2,7 +2,7 @@
 color:white;
 }
 #record_pannel{
-    width:360px;
+    width:320px;
 }
 #camera_pannel{
     display:column;
@@ -15,7 +15,10 @@ color:white;
     display:none;
     color:white;
 }
+
 @media screen and (min-width:480px) {#record_pannel{width:500px;}} 
 @media screen and (min-width:480px) {#camera_pannel{display:flex;width:800px;}}
+@media screen and (max-width:480px) {#login_pannel{width:320px;}}
+@media screen and (max-width:480px) {#sign_up_pannel{width:320px;}}
 @media screen and (min-width:480px) {#category_pannel{width:600px;}}
 @media screen and (min-width:480px) {#username{display:block;}}   
