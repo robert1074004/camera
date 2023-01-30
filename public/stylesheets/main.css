@@ -1,24 +1,22 @@
 .nav-link {
 color:white;
 }
-#record_pannel{
-    width:320px;
+#record_panel{
+    width:360px;
 }
-#camera_pannel{
+#camera_panel{
     display:column;
     width:auto;
 }
-#category_pannel{
-    width:auto;
-}
-#username{
-    display:none;
-    color:white;
+#category_panel{
+    width:350px;
 }
 
-@media screen and (min-width:480px) {#record_pannel{width:500px;}} 
-@media screen and (min-width:480px) {#camera_pannel{display:flex;width:800px;}}
-@media screen and (max-width:480px) {#login_pannel{width:320px;}}
-@media screen and (max-width:480px) {#sign_up_pannel{width:320px;}}
-@media screen and (min-width:480px) {#category_pannel{width:600px;}}
-@media screen and (min-width:480px) {#username{display:block;}}   
+
+@media screen and (min-width:480px) {#record_panel{width:500px;}} 
+@media screen and (min-width:480px) {#camera_panel{display:flex;width:800px;}}
+@media screen and (min-width:480px) {#category_panel{width:600px;}}
+@media screen and (min-width:480px) {#userName{display:none;}}
+@media screen and (max-width:480px) {#login_panel{width:320px;}}
+@media screen and (max-width:480px) {#sign_up_panel{width:320px;}} 
+@media screen and (max-width:480px) {#username{display:none;color:white;}}  
