@@ -22,7 +22,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav" >
           <ul class="navbar-nav">
-
             {{#if isAuthenticated}}
               <li class="nav-item" id="userName">
                 <a class="nav-link" href="#">歡迎，{{ user.name}}</a>
@@ -47,10 +46,9 @@
               <a class="nav-link" href="/users/logout">登出</a>
             </li> 
           </ul>
-         
           {{/if}}
         </div>
-         <h5 class="mb-0 me-5" id="username" style="color: white;">歡迎，{{ user.name}}</h5>
+         {{#if isAuthenticated}}<h5 class="mb-0 me-5" id="username" style="color: white;">歡迎，{{ user.name}}</h5>{{/if}}
       </div>
     </nav>
   
