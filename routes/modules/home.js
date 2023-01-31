@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Camera = require('../../models/camera')
 
+router.get('/aboutUs', (req, res) => {
+     res.render('aboutUs')
+})
+
 router.get('/:category',(req,res) => {
      const category = req.params.category
      Camera.find({category})
@@ -9,6 +13,7 @@ router.get('/:category',(req,res) => {
             .then(cameras =>  res.render('index',{cameras}))
             .catch(error => console.log('error'))
 })
+
 
 
 
