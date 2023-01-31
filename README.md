@@ -16,10 +16,10 @@
 ## 安裝
  1.打開你的 terminal，Clone 此專案至本機電腦
       
-    git clone https://github.com/robert1074004/expense-tracker
+    git clone https://github.com/robert1074004/camera
  2.開啟終端機(Terminal)，進入存放此專案的資料夾
  
-    cd expense-tracker
+    cd camera
  3.安裝 nodemon
  
     npm install -g nodemon
