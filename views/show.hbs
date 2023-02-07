@@ -11,7 +11,7 @@
             </div>
             <h5 class="card-title">{{camera.name}}</h5>
             <img src="{{camera.image}}" width="120" length="120"  alt="..." class="mx-auto">
-            <form action="/records/show/{{camera.name}}" method="POST">
+            <form action="/equipments/show/{{camera.name}}" method="POST">
                 <p class="card-text my-2"> $NT {{camera.price}} / 1天</p>
                 {{#if error}}
                 <h5 class="card-title mb-2">目前無庫存</h5>
