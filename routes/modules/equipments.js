@@ -3,9 +3,9 @@ const router = express.Router()
 
 const equipmentController = require('../../controllers/equipment-controller')
 
-router.get('/show/:name',equipmentController.getEquipment)
+router.get('/show/:name', equipmentController.getEquipment)
 
-router.post('/show/:name',equipmentController.postRecord)
+router.post('/show/:name', equipmentController.postRecord)
 
 router.get('/records', equipmentController.getRecords)
 
