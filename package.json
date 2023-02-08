@@ -8,8 +8,10 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "seed": "node models/seeds/cameraSeeder.js",
+    "eslintInit": "eslint --init",
     "lint": "eslint --fix ."
   },
+  "pre-commit": ["lint"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robert1074004/camera.git"
@@ -39,6 +41,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint-plugin-react": "^7.32.2",
+    "pre-commit": "^1.2.2"
   }
 }
