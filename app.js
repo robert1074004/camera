@@ -1,4 +1,3 @@
-
 const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars')
@@ -7,6 +6,7 @@ const routes = require('./routes')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
 const app = express()
+const SESSION_SECRET = 'secret'
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -18,7 +18,7 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -34,9 +34,8 @@ app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
-  res.locals.error = req.session.messages
   res.locals.success_msg = req.flash('success_msg')
-  res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.error_msg = req.flash('error_msg')
   next()
 })
 
