@@ -3,7 +3,7 @@ const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
-const usePassport = require('./config/passport')
+const passport = require('./config/passport')
 const flash = require('connect-flash')
 const app = express()
 const SESSION_SECRET = 'secret'
@@ -27,12 +27,13 @@ app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-usePassport(app)
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(flash())
 
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.isAuthenticated = req.isAuthenticated
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
   res.locals.error_msg = req.flash('error_msg')

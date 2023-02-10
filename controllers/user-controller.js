@@ -15,10 +15,22 @@ const userController = {
         return User.create({ name, email, password: hash })
       })
       .then(() => {
-        req.flash('註冊成功!')
+        req.flash('success_msg', '註冊成功!')
         res.redirect('/')
       })
       .catch(err => next(err))
+  },
+  logInPage: (req, res) => {
+    res.render('log_in')
+  },
+  logIn: (req, res) => {
+    req.flash('success_msg', '成功登入!')
+    res.redirect('/equipments/SLRcamera')
+  },
+  logout: (req, res) => {
+    req.flash('success_msg', '成功登出!')
+    req.logout()
+    res.redirect('/login')
   }
 }
 
