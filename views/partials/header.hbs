@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary" >
+      <div class="container-fluid" >
+        <a class="navbar-brand" href="/equipments/SLRcamera">TWT器材租借站</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav" >
+          <ul class="navbar-nav">
+            {{#if isAuthenticated}}
+              <li class="nav-item" id="userName">
+                <a class="nav-link" href="#">歡迎，{{ user.name}}</a>
+              </li>
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                器材種類
+              </a>
+              <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="/equipments/SLRcamera">相機</a></li>
+                <li><a class="dropdown-item" href="/equipments/cameratripod">腳架</a></li>
+                <li><a class="dropdown-item" href="/equipments/camera">攝影機</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/equipments/records">租借記錄</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutUS">關於我們</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">登出</a>
+            </li> 
+          </ul>
+          {{/if}}
+        </div>
+         {{#if isAuthenticated}}<h5 class="mb-0 me-5" id="username" style="color: white;">歡迎，{{ user.name}}</h5>{{/if}}
+      </div>
+    </nav>

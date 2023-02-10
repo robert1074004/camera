@@ -25,10 +25,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   User.findById(id)
     .lean()
-    .then(user => {
-      console.log(user)
-      done(null, user)
-    })
+    .then(user => done(null, user))
     .catch(err => done(err, false))
 })
 

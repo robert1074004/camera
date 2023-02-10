@@ -1,9 +1,8 @@
 
-<div class="row mt-5">
+<div class="row mt-2">
   <div class="col-md-4 m-auto" id="sign_up_panel">
     <div class="card card-body border border-dark border-2">
       <h1 class="text-center mt-3">Register</h1>
-      {{> message}}
       <form action="/sign_up" method="POST">
         <div class="form-group">
           <label for="name">Name</label>
@@ -25,7 +24,7 @@
         <button type="submit" class="btn btn-primary btn-block">Register</button>
       </form>
       <p class="lead mt-4">
-        Have An Account? <a href="/users/log_in">Login</a>
+        Have An Account? <a href="/log_in">Login</a>
       </p>
     </div>
   </div>
