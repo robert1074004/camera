@@ -1,10 +1,10 @@
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const LocalStrategy = require('passport-local').Strategy
-const User = require('../models/user')
+const { User } = require('../models')
 
 passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password', passReqToCallback: true }, (req, email, password, done) => {
-  User.findOne({ email })
+  User.findOne({ where: { email } })
     .then(user => {
       if (!user) {
         return done(null, false, req.flash('error_msg', '帳號或密碼輸入錯誤!'))
@@ -23,9 +23,11 @@ passport.serializeUser((user, done) => {
   done(null, user.id)
 })
 passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .lean()
-    .then(user => done(null, user))
+  User.findByPk(id)
+    .then(user => {
+      user = user.toJSON()
+      done(null, user)
+    })
     .catch(err => done(err, false))
 })
 

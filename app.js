@@ -13,8 +13,6 @@ const SESSION_SECRET = 'secret'
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-console.log(process.env.MONGODB_URI)
-require('./config/mongoose')
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
