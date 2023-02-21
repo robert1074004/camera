@@ -1,0 +1,22 @@
+<form action="/admin/equipments" method="POST">
+  <div class="mb-4 text-center">
+    <h1 class="h3 font-weight-normal mb-3">Create Equipment</h1>
+  </div>
+  <div class="form-row mb-3">
+    <label class="form-label" for="name">name</label>
+    <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" required>
+  </div>
+  <div class="form-row mb-3">
+    <label class="form-label" for="category">category</label>
+    <input class="form-control" type="text" name="category" id="category" placeholder="Enter category" required>
+  </div>
+  <div class="form-row mb-3">
+    <label class="form-label" for="price">price</label>
+    <input class="form-control" type="number"  min="1" name="price" id="price" placeholder="Enter price" required>
+  </div>
+  <div class="form-row mb-3">
+    <label class="form-label" for="quantity">quantity</label>
+    <input class="form-control" type="number" min="1" name="quantity" id="quantity" placeholder="Enter quantity" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
