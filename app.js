@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const routes = require('./routes')
 const passport = require('./config/passport')
@@ -24,6 +25,8 @@ app.use(session({
 }))
 
 app.use(express.static('public'))
+
+app.use(methodOverride('_method'))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 

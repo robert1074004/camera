@@ -2,10 +2,14 @@ const express = require('express')
 const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
 
-router.get('/equipments/create', adminController.createEquipment)
+router.get('/equipment/create', adminController.createEquipment)
+
+router.get('/equipment/:id/edit', adminController.editEquipment)
 
 router.get('/equipments', adminController.getEquipments)
 
-router.post('/equipments', adminController.postEquipment)
+router.post('/equipment', adminController.postEquipment)
+
+router.put('/equipment/:id', adminController.putEquipment)
 
 module.exports = router
