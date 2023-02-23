@@ -13,7 +13,7 @@ router.post('/sign_up', userController.SignUp)
 router.get('/log_in', userController.logInPage)
 router.post('/log_in', passport.authenticate('local', { failureRedirect: '/log_in', failureFlash: true }), userController.logIn)
 router.get('/logout', userController.logout)
-router.get('/aboutUs', authenticated, (req, res) => { res.render('aboutUs') })
+router.get('/aboutUs', (req, res) => { res.render('aboutUs') })
 
 router.get('/', authenticated, (req, res) => res.redirect('/equipments/:category'))
 router.use('/', generalErrorHandler)
