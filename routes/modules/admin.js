@@ -14,4 +14,6 @@ router.post('/equipment', adminController.postEquipment)
 
 router.put('/equipment/:id', adminController.putEquipment)
 
+router.delete('/equipment/:id', adminController.deleteEquipment)
+
 module.exports = router

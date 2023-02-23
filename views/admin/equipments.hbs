@@ -17,7 +17,7 @@
       <tbody>
         {{#each equipments}}
         <tr>
-          <td scope="row"><b>{{this.id}}</b></td>
+          <td scope="row"><b>{{this.index}}</b></td>
           <td><b style="font-size:16px;">{{this.name}}</b></td>
           <td>
             <button type="button" class="btn btn-link">
@@ -31,7 +31,7 @@
               </a>
             </button>
             <form action="/admin/equipment/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-              <button type="submit" class="btn btn-link link-danger">Delete</button>
+              <button type="submit" class="btn btn-link link-danger" onclick="return confirm('確定要刪除此器材')">Delete</button>
             </form>
           </td>
         </tr>

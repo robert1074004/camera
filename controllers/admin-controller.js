@@ -3,7 +3,13 @@ const { Equipment } = require('../models')
 const adminController = {
   getEquipments: (req, res, next) => {
     Equipment.findAll({ raw: true })
-      .then(equipments => res.render('admin/equipments', { equipments }))
+      .then(equipments => {
+        equipments = equipments.map(equipment => ({
+          ...equipment,
+          index: equipments.indexOf(equipment) + 1
+        }))
+        res.render('admin/equipments', { equipments })
+      })
       .catch(err => next(err))
   },
   createEquipment: (req, res, next) => {
@@ -24,6 +30,7 @@ const adminController = {
   getEquipment: (req, res, next) => {
     Equipment.findByPk(req.params.id)
       .then((equipment) => {
+        if (!equipment) throw new Error("Equipment didn't exist!")
         equipment = equipment.toJSON()
         res.render('admin/equipment', { equipment })
       })
@@ -31,6 +38,7 @@ const adminController = {
   editEquipment: (req, res, next) => {
     Equipment.findByPk(req.params.id)
       .then((equipment) => {
+        if (!equipment) throw new Error("Equipment didn't exist!")
         equipment = equipment.toJSON()
         res.render('admin/edit-equipment', { equipment })
       })
@@ -50,6 +58,17 @@ const adminController = {
         res.redirect('/admin/equipments')
       })
       .catch(err => next(err))
+  },
+  deleteEquipment: (req, res, next) => {
+    Equipment.findByPk(req.params.id)
+      .then((equipment) => {
+        if (!equipment) throw new Error("Equipment didn't exist!")
+        return equipment.destroy()
+      })
+      .then(() => {
+        req.flash('success_msg', 'Equipment was successfully deleted')
+        res.redirect('/admin/equipments')
+      })
   }
 }
 
