@@ -11,12 +11,46 @@ color:white;
 #category_panel{
     width:350px;
 }
+#equipments_panel{
+    width:360px;
+}
+#form_panel {
+    width:320px;
+}
+table {
+    width:800px;
+}
+th {
+    background-color: lightblue;
+}
+td, th {
+    border:1px solid gray;
+    width: 30px;
+    height: 20px;
+}
+
+td:first-child, th:first-child {
+    position: sticky;
+    left:0;
+    z-index:1;
+    background-color: lightpink;
+}
+thead tr th {
+    position:sticky;
+    top:0;
+}
+th:first-child{
+    z-index:2;
+    background-color: lightblue;
+}
 
 
 @media screen and (min-width:480px) {#record_panel{width:500px;}} 
+@media screen and (min-width:480px) {#equipments_panel{width:800px;}} 
 @media screen and (min-width:480px) {#camera_panel{display:flex;width:800px;}}
 @media screen and (min-width:480px) {#category_panel{width:600px;}}
 @media screen and (min-width:480px) {#userName{display:none;}}
+@media screen and (min-width:480px) {#form_panel{width:500px;}}
 @media screen and (max-width:480px) {#login_panel{width:320px;}}
 @media screen and (max-width:480px) {#sign_up_panel{width:320px;}} 
 @media screen and (max-width:480px) {#username{display:none;color:white;}}  
