@@ -21,21 +21,26 @@ const adminController = {
       })
       .catch(err => next(err))
   },
+  getEquipment: (req, res, next) => {
+    Equipment.findByPk(req.params.id)
+      .then((equipment) => {
+        equipment = equipment.toJSON()
+        res.render('admin/equipment', { equipment })
+      })
+  },
   editEquipment: (req, res, next) => {
-    const id = req.params.id
-    Equipment.findByPk(id)
+    Equipment.findByPk(req.params.id)
       .then((equipment) => {
         equipment = equipment.toJSON()
         res.render('admin/edit-equipment', { equipment })
       })
   },
   putEquipment: (req, res, next) => {
-    const id = req.params.id
     const { name, category, price, quantity } = req.body
     if (!name.trim() || !category.trim() || !price.trim() || !quantity.trim()) {
       throw new Error('Some fields must be required !')
     }
-    Equipment.findByPk(id)
+    Equipment.findByPk(req.params.id)
       .then((equipment) => {
         if (!equipment) throw new Error("Equipment didn't exist!")
         return equipment.update({ name, category, price, quantity })
