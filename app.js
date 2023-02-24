@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
+const path = require('path')
 const routes = require('./routes')
 const passport = require('./config/passport')
 const { getUser } = require('./helpers/auth-helper')
@@ -25,6 +26,8 @@ app.use(session({
 }))
 
 app.use(express.static('public'))
+
+app.use('/upload', express.static(path.join(__dirname, 'upload')))
 
 app.use(methodOverride('_method'))
 

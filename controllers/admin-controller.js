@@ -1,5 +1,5 @@
 const { Equipment } = require('../models')
-
+const { localFileHandler } = require('../helpers/file-helpers')
 const adminController = {
   getEquipments: (req, res, next) => {
     Equipment.findAll({ raw: true })
@@ -20,7 +20,11 @@ const adminController = {
     if (!name.trim() || !category.trim() || !price.trim() || !quantity.trim()) {
       throw new Error('Some fields must be required !')
     }
-    Equipment.create({ name, category, price, quantity })
+    const { file } = req
+    localFileHandler(file)
+      .then(filePath => {
+        return Equipment.create({ name, category, price, quantity, image: filePath || null })
+      })
       .then(() => {
         req.flash('success_msg', 'Equipment was successfully created')
         res.redirect('/admin/equipments')
@@ -48,10 +52,11 @@ const adminController = {
     if (!name.trim() || !category.trim() || !price.trim() || !quantity.trim()) {
       throw new Error('Some fields must be required !')
     }
-    Equipment.findByPk(req.params.id)
-      .then((equipment) => {
+    const { file } = req
+    Promise.all([Equipment.findByPk(req.params.id), localFileHandler(file)])
+      .then(([equipment, filePath]) => {
         if (!equipment) throw new Error("Equipment didn't exist!")
-        return equipment.update({ name, category, price, quantity })
+        return equipment.update({ name, category, price, quantity, image: filePath || equipment.image })
       })
       .then(() => {
         req.flash('success_msg', 'Equipment was successfully edited')

@@ -10,6 +10,8 @@ Desktop.ini
 
 # npm
 node_modules
+temp
+upload
 .env
 *.log
 *.gz
