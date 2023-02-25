@@ -5,10 +5,10 @@ const equipmentController = require('../../controllers/equipment-controller')
 
 router.get('/:category', equipmentController.getCategories)
 
-router.get('/show/:name', equipmentController.getEquipment)
+router.get('/show/:id', equipmentController.getEquipment)
 
-router.post('/show/:name', equipmentController.postRecord)
+router.post('/show/:id', equipmentController.postRecord)
 
-router.get('/records', equipmentController.getRecords)
+// router.get('/records', equipmentController.getRecords)
 
 module.exports = router

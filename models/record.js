@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // define association here
     }
   };
   Record.init({
     userName: DataTypes.STRING,
     userEmail: DataTypes.STRING,
+    equipmentName: DataTypes.STRING,
     date: DataTypes.DATE,
     status: DataTypes.STRING,
     category: DataTypes.STRING,

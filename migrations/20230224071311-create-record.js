@@ -12,14 +12,17 @@ module.exports = {
         type: Sequelize.STRING
       },
       user_email: {
-        type: Sequelize.STRING,
-        unique: true
+        type: Sequelize.STRING
+      },
+      equipment_name: {
+        type: Sequelize.STRING
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: '已被預約'
       },
       category: {
         type: Sequelize.STRING

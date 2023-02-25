@@ -16,7 +16,7 @@
   </div>
   <div class="form-row mb-3">
     <label class="form-label" for="quantity">quantity</label>
-    <input class="form-control" type="number" min="1" name="quantity" id="quantity" placeholder="Enter quantity"
+    <input class="form-control" type="number" min="0" name="quantity" id="quantity" placeholder="Enter quantity"
       value="{{equipment.quantity}}" required>
   </div>
   <div class="form-row mb-3">
@@ -25,7 +25,7 @@
   </div>
   <div class="form-row mb-3">
     <label class="form-label" for="description">Description</label>
-    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+    <textarea class="form-control" id="description" name="description" rows="3" >{{equipment.description}}</textarea >
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
   <a class="btn btn-secondary" href="javascript:history.back()">Back</a>

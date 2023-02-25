@@ -3,28 +3,21 @@
         <h4>選擇預借日期</h4>
     </div>
     <div class="card-body">
-        {{> message}}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            預借日期需與今天相隔一天
+            預借日期需與今天相隔2天
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <h5 class="card-title">{{camera.name}}</h5>
-        <img src="{{camera.image}}" width="120" length="120" alt="..." class="mx-auto">
-        <form action="/equipments/show/{{camera.name}}" method="POST">
-            <p class="card-text my-2"> $NT {{camera.price}} / 1天</p>
-            {{#if error}}
-            <h5 class="card-title mb-2">目前無庫存</h5>
-            <a class="btn btn-primary" href="javascript:history.back(-1)">返回</a>
-            {{else}}
+        <h5 class="card-title">{{equipment.name}}</h5>
+        <img src="{{equipment.image}}" width="120" length="120" alt="..." class="mx-auto">
+        <form action="/equipments/show/{{equipment.id}}" method="POST">
+            <p class="card-text my-2"> $NT {{equipment.price}} / 1天</p>
             <div class="form-group mb-3">
-                <label for="storage">租借數量(目前庫存 : {{camera.quantity}})</label>
-                <input name="quantity" id="storage" type="number" max="{{camera.quantity}}" min='1'
+                <label for="storage">租借數量(目前庫存 : {{equipment.quantity}})</label>
+                <input name="quantity" id="storage" type="number" max="{{equipment.quantity}}" min='1'
                     style="width:80px;height:30px;display:inline-block;" class="form-control ms-2" required>
             </div>
-            <input type="datetime-local" name="time" class="mb-2" required>
+            <input type="date" name="date" class="mb-2" required>
             <button type="submit" class="btn btn-primary btn-sm">確定日期</button>
-            {{/if}}
-
         </form>
     </div>
 </div>
