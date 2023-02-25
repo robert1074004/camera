@@ -1,15 +1,15 @@
 <div class="container mt-5" id="record_panel">
     <div class="list-group" style=" max-height:510px; overflow:auto;">
-        <div class="list-group-item list-group-item-secondary list-group-item-action active text-center "
+        <div class="list-group-item list-group-item-light list-group-item-action active text-center "
             style="position: sticky; top:0;">
             <h5 class="mb-0" style="color:white;">你的租借紀錄</h5>
         </div>
-        {{# each record}}
+        {{#each records}}
         <div class="list-group-item list-group-item-action list-group-item text-center" aria-current="true">
-            <h6>租借器材 : {{this.name}}</h6>
+            <h6>租借器材 : {{this.equipmentName}}</h6>
             <p class="my-2">租借數量 : {{this.quantity}}</p>
             <p class="my-2">請依預借日期前往實體店面租借</p>
-            <small>預借日期: {{this.time}}</small>
+            <small>預借日期: {{this.date}}</small>
             <p class="my-2"><strong>器材現況: {{this.status}}</strong></p>
         </div>
         {{/each}}

@@ -25,6 +25,7 @@ const equipmentController = {
     const { date, quantity } = req.body
     const userEmail = req.user.email
     const userName = req.user.name
+    const userId = req.user.id
     const now = new Date()
     const myDate = new Date(date)
     if ((myDate - now) / (1000 * 60 * 60 * 24) < 1) throw new Error('日期選擇錯誤!')
@@ -32,31 +33,22 @@ const equipmentController = {
     Equipment.findByPk(req.params.id)
       .then((equipment) => {
         const { name, category, price } = equipment.toJSON()
-        console.log(name)
-        Promise.all([equipment.decrement('quantity', { by: quantity }), Record.create({ userName, userEmail, date, category, quantity, equipmentName: name, totalPrice: quantity * price })])
+        Promise.all([equipment.decrement('quantity', { by: quantity }), Record.create({ userName, userEmail, userId, date, category, quantity, equipmentName: name, totalPrice: quantity * price })])
           .then(() => {
             req.flash('success_msg', '租借成功!')
-            res.redirect('/record')
+            res.redirect('/equipments/records')
           })
           .catch(err => next(err))
       })
+  },
+  getRecords: (req, res, next) => {
+    const userId = req.user.id
+    Record.findAll({ where: { userId }, raw: true, order: [['id', 'DESC']] })
+      .then((records) => {
+        res.render('record', { records })
+      })
+      .catch(err => next(err))
   }
-  // getRecords: (req, res) => {
-  //   const userId = req.user._id
-  //   records.find({
-  //     userId
-  //   })
-  //     .lean()
-  //     .sort({
-  //       _id: 'asc'
-  //     })
-  //     .then(record => {
-  //       res.render('record', {
-  //         record
-  //       })
-  //     })
-  //     .catch(error => console.error(error))
-  // }
 }
 
 module.exports = equipmentController
