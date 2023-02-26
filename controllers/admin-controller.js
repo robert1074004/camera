@@ -1,4 +1,5 @@
 const { Equipment } = require('../models')
+const { User } = require('../models')
 const { localFileHandler } = require('../helpers/file-helpers')
 const adminController = {
   getEquipments: (req, res, next) => {
@@ -37,8 +38,14 @@ const adminController = {
       .then((equipment) => {
         if (!equipment) throw new Error("Equipment didn't exist!")
         equipment = equipment.toJSON()
+        Promise.all([User.findByPk(equipment.userId, { raw: true })])
+          .then(([user]) => {
+            equipment.userName = user.name
+          })
+          .catch(err => next(err))
         res.render('admin/equipment', { equipment })
       })
+      .catch(err => next(err))
   },
   editEquipment: (req, res, next) => {
     Equipment.findByPk(req.params.id)
