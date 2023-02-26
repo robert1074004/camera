@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       User.hasMany(models.Record, { foreignKey: 'userId' })
+      User.hasMany(models.Equipment, { foreignKey: 'userId' })
     }
   };
   User.init({
