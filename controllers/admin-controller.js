@@ -1,6 +1,6 @@
 const { Equipment } = require('../models')
 const { User } = require('../models')
-const { localFileHandler } = require('../helpers/file-helpers')
+const { imgurFileHandler } = require('../helpers/file-helpers')
 const adminController = {
   getEquipments: (req, res, next) => {
     Equipment.findAll({ raw: true })
@@ -23,7 +23,7 @@ const adminController = {
       throw new Error('Some fields must be required !')
     }
     const { file } = req
-    localFileHandler(file)
+    imgurFileHandler(file)
       .then(filePath => {
         return Equipment.create({ name, category, price, quantity, description, image: filePath || null, userId })
       })
@@ -62,7 +62,7 @@ const adminController = {
       throw new Error('Some fields must be required !')
     }
     const { file } = req
-    Promise.all([Equipment.findByPk(req.params.id), localFileHandler(file)])
+    Promise.all([Equipment.findByPk(req.params.id), imgurFileHandler(file)])
       .then(([equipment, filePath]) => {
         if (!equipment) throw new Error("Equipment didn't exist!")
         return equipment.update({ name, category, price, quantity, description, image: filePath || equipment.image, userId })
