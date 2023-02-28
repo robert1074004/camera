@@ -40,10 +40,11 @@ const adminController = {
         equipment = equipment.toJSON()
         Promise.all([User.findByPk(equipment.userId, { raw: true })])
           .then(([user]) => {
+            if (!user) throw new Error("User didn't exist!")
             equipment.userName = user.name
+            res.render('admin/equipment', { equipment })
           })
           .catch(err => next(err))
-        res.render('admin/equipment', { equipment })
       })
       .catch(err => next(err))
   },
