@@ -95,6 +95,22 @@ const adminController = {
         res.render('admin/users', { users })
       })
       .catch(err => next(err))
+  },
+  patchUser: (req, res, next) => {
+    User.findByPk(req.params.id)
+      .then((user) => {
+        if (!user) throw new Error("User didn't exist !")
+        if (user.toJSON().email === 'abc50113@yahoo.com.tw') throw new Error("You can't edit this admin!")
+        if (user.toJSON().isAdmin) {
+          return user.update({ isAdmin: false })
+        }
+        return user.update({ isAdmin: true })
+      })
+      .then(() => {
+        req.flash('success_msg', 'User was successfully edited')
+        res.redirect('/admin/users')
+      })
+      .catch(err => next(err))
   }
 }
 

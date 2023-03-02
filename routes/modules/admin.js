@@ -5,6 +5,8 @@ const upload = require('../../middleware/multer')
 
 router.get('/users', adminController.getUsers)
 
+router.patch('/user/:id', adminController.patchUser)
+
 router.get('/equipments', adminController.getEquipments)
 
 router.get('/equipment/create', adminController.createEquipment)
