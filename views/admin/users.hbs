@@ -11,11 +11,6 @@
     <a class="nav-link" href="#">Records</a>
   </li>
 </ul>
-  <div class="d-flex  my-3">
-    <a href='/admin/equipment/create'>
-      <button type="button" class="btn btn-primary">New Equipment</button>
-    </a>
-  </div>
   <div style="max-height:400px; width:100%; overflow: auto;" class="mx-auto border border-3 border-dark">
     <table class=" mb-0" style="background-color: white;">
       <thead class="thead-dark">
@@ -26,23 +21,15 @@
         </tr>
       </thead>
       <tbody>
-        {{#each equipments}}
+        {{#each users}}
         <tr>
           <td scope="row"><b>{{this.index}}</b></td>
           <td><b style="font-size:16px;">{{this.name}}</b></td>
           <td>
-            <button type="button" class="btn btn-link">
-              <a class="btn btn-link link-primary" href="/admin/equipment/{{this.id}}">
-                Show
-              </a>
-            </button>
-            <button type="button" class="btn btn-link">
-              <a class="btn btn-link link-primary" href="/admin/equipment/{{this.id}}/edit">
-                Edit
-              </a>
-            </button>
-            <form action="/admin/equipment/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-              <button type="submit" class="btn btn-link link-danger" onclick="return confirm('確定要刪除此器材')">Delete</button>
+            <form action="/admin/user/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-link " >
+                {{#if this.isAdmin}} set as user {{else}} set as admin {{/if}}
+              </button>
             </form>
           </td>
         </tr>

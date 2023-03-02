@@ -3,6 +3,8 @@ const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
 const upload = require('../../middleware/multer')
 
+router.get('/users', adminController.getUsers)
+
 router.get('/equipments', adminController.getEquipments)
 
 router.get('/equipment/create', adminController.createEquipment)

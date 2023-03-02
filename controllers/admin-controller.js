@@ -84,6 +84,17 @@ const adminController = {
         req.flash('success_msg', 'Equipment was successfully deleted')
         res.redirect('/admin/equipments')
       })
+  },
+  getUsers: (req, res, next) => {
+    User.findAll({ raw: true })
+      .then((users) => {
+        users = users.map(user => ({
+          ...user,
+          index: users.indexOf(user) + 1
+        }))
+        res.render('admin/users', { users })
+      })
+      .catch(err => next(err))
   }
 }
 
