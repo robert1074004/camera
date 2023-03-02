@@ -1,16 +1,5 @@
 <div id="equipments_panel" class="mx-auto">
-  <h1 class="text-center ">器材後台</h1>
-  <ul class="nav nav-tabs nav-fill bg-dark my-3">
-  <li class="nav-item ">
-    <a class="nav-link " aria-current="page" href="/admin/equipments">Equipments</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/users">Users</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Records</a>
-  </li>
-</ul>
+  {{> admin_list}}
   <div style="max-height:400px; width:100%; overflow: auto;" class="mx-auto border border-3 border-dark">
     <table class=" mb-0" style="background-color: white;">
       <thead class="thead-dark">
@@ -27,7 +16,7 @@
           <td><b style="font-size:16px;">{{this.name}}</b></td>
           <td>
             <form action="/admin/user/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
-              <button type="submit" class="btn btn-link " >
+              <button type="submit" class="btn btn-link ">
                 {{#if this.isAdmin}} set as user {{else}} set as admin {{/if}}
               </button>
             </form>

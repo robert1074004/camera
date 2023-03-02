@@ -1,5 +1,4 @@
-const { Equipment } = require('../models')
-const { User } = require('../models')
+const { User, Equipment, Record } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
 const adminController = {
   getEquipments: (req, res, next) => {
@@ -109,6 +108,17 @@ const adminController = {
       .then(() => {
         req.flash('success_msg', 'User was successfully edited')
         res.redirect('/admin/users')
+      })
+      .catch(err => next(err))
+  },
+  getRecords: (req, res, next) => {
+    Record.findAll({ raw: true })
+      .then((records) => {
+        records = records.map(record => ({
+          ...record,
+          index: records.indexOf(record) + 1
+        }))
+        res.render('admin/records', { records })
       })
       .catch(err => next(err))
   }

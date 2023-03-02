@@ -1,0 +1,43 @@
+<div id="records_panel" class="mx-auto">
+    {{> admin_list }}
+    <div style="max-height:400px; width:100%; overflow: auto;" class="mx-auto border border-3 border-dark">
+        <table class=" mb-0" style="background-color: white;" id="record_table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">租借人</th>
+                    <th scope="col">email</th>
+                    <th scope="col">器材種類</th>
+                    <th scope="col">器材名稱</th>
+                    <th scope="col">數量</th>
+                    <th scope="col">租借金額</th>
+                    <th scope="col">取件日期</th>
+                    <th scope="col">租借狀態</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each records}}
+                <tr>
+                    <td scope="row"><b>{{this.index}}</b></td>
+                    <td>{{this.userName}}</td>
+                    <td>{{this.userEmail}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.equipmentName}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.totalPrice}}</td>
+                    <td>{{this.date}}</td>
+                    <td>
+                        <form action="/admin/record/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-link ">
+                                {{this.status}}
+                            </button>
+                        </form>
+                    </td>
+                    <td></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

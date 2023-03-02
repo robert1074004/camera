@@ -3,6 +3,8 @@ const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
 const upload = require('../../middleware/multer')
 
+router.get('/records', adminController.getRecords)
+
 router.get('/users', adminController.getUsers)
 
 router.patch('/user/:id', adminController.patchUser)

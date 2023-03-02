@@ -17,6 +17,12 @@ color:white;
 #form_panel {
     width:320px;
 }
+#records_panel{
+    width:360px;
+}
+#record_table{
+    width:1500px;
+}
 table {
     width:800px;
 }
@@ -45,7 +51,8 @@ th:first-child{
 }
 
 
-@media screen and (min-width:480px) {#record_panel{width:500px;}} 
+@media screen and (min-width:480px) {#record_panel{width:500px;}}
+@media screen and (min-width:480px) {#records_panel{width:1500px;}}  
 @media screen and (min-width:480px) {#equipments_panel{width:800px;}} 
 @media screen and (min-width:480px) {#camera_panel{display:flex;width:800px;}}
 @media screen and (min-width:480px) {#category_panel{width:600px;}}
