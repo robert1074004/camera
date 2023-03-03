@@ -6,11 +6,11 @@
     </a>
   </div>
   <div style="max-height:400px; width:100%; overflow: auto;" class="mx-auto border border-3 border-dark">
-    <table class=" mb-0" style="background-color: white;">
+    <table class=" mb-0" style="background-color: white;" id="equipment_table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
+          <th scope="col" style="left:0;z-index:2;">Name</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
         {{#each equipments}}
         <tr>
           <td scope="row"><b>{{this.index}}</b></td>
-          <td><b style="font-size:16px;">{{this.name}}</b></td>
+          <td style="position:sticky;left:0;z-index:1;background-color:white;"><b style="font-size:16px;">{{this.name}}</b></td>
           <td>
             <button type="button" class="btn btn-link">
               <a class="btn btn-link link-primary" href="/admin/equipment/{{this.id}}">

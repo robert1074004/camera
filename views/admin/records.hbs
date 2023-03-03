@@ -5,7 +5,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">租借人</th>
+                    <th scope="col" style="left:0;z-index:2;" >租借人</th>
                     <th scope="col">email</th>
                     <th scope="col">器材種類</th>
                     <th scope="col">器材名稱</th>
@@ -20,7 +20,7 @@
                 {{#each records}}
                 <tr>
                     <td scope="row"><b>{{this.index}}</b></td>
-                    <td>{{this.userName}}</td>
+                    <td style="position:sticky;left:0;z-index:1;background-color:white;">{{this.userName}}</td>
                     <td>{{this.userEmail}}</td>
                     <td>{{this.category}}</td>
                     <td>{{this.equipmentName}}</td>

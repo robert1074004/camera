@@ -5,8 +5,7 @@ color:white;
     width:360px;
 }
 #camera_panel{
-    display:column;
-    width:auto;
+    width:360px;
 }
 #category_panel{
     width:350px;
@@ -22,6 +21,9 @@ color:white;
 }
 #record_table{
     width:1500px;
+}
+#equipment_table{
+    width:650px;
 }
 table {
     width:800px;
@@ -53,8 +55,8 @@ th:first-child{
 
 @media screen and (min-width:480px) {#record_panel{width:500px;}}
 @media screen and (min-width:480px) {#records_panel{width:1500px;}}  
-@media screen and (min-width:480px) {#equipments_panel{width:800px;}} 
-@media screen and (min-width:480px) {#camera_panel{display:flex;width:800px;}}
+@media screen and (min-width:480px) {#equipments_panel{width:650px;}} 
+@media screen and (min-width:480px) {#camera_panel{display:flex;justify-content:center;width:800px;}}
 @media screen and (min-width:480px) {#category_panel{width:600px;}}
 @media screen and (min-width:480px) {#userName{display:none;}}
 @media screen and (min-width:480px) {#form_panel{width:500px;}}

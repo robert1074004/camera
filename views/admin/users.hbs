@@ -5,7 +5,7 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
+          <th scope="col" style="left:0;z-index:2;">Name</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -13,7 +13,7 @@
         {{#each users}}
         <tr>
           <td scope="row"><b>{{this.index}}</b></td>
-          <td><b style="font-size:16px;">{{this.name}}</b></td>
+          <td style="position:sticky;left:0;z-index:1;background-color:white;"><b style="font-size:16px;">{{this.name}}</b></td>
           <td>
             <form action="/admin/user/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
               <button type="submit" class="btn btn-link ">
