@@ -34,7 +34,11 @@
                             </button>
                         </form>
                     </td>
-                    <td></td>
+                    <td><form action="/admin/record/email/{{this.id}}?_" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger btn-sm ">
+                               寄出郵件
+                            </button>
+                        </form></td>
                 </tr>
                 {{/each}}
             </tbody>
