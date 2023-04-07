@@ -123,6 +123,21 @@ const adminController = {
       })
       .catch(err => next(err))
   },
+  patchRecord: (req, res, next) => {
+    Record.findByPk(req.params.id)
+      .then((record) => {
+        if (!record) throw new Error("Record didn't exist !")
+        if (record.toJSON().status === '已借出') {
+          return record.update({ status: '已被預約' })
+        }
+        return record.update({ status: '已借出' })
+      })
+      .then(() => {
+        req.flash('success_msg', "Record's status is successfully edited")
+        res.redirect('back')
+      })
+      .catch(err => next(err))
+  },
   deleteRecord: (req, res, next) => {
     Record.findByPk(req.params.id)
       .then((record) => {

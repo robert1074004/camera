@@ -7,6 +7,8 @@ router.post('/record/email/:id', adminController.postEmail)
 
 router.delete('/record/:id', adminController.deleteRecord)
 
+router.patch('/record/:id', adminController.patchRecord)
+
 router.get('/records', adminController.getRecords)
 
 router.get('/users', adminController.getUsers)
