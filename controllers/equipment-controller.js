@@ -28,12 +28,13 @@ const equipmentController = {
     const userId = req.user.id
     const now = new Date()
     const myDate = new Date(date)
+    const deadline = myDate.setDate(myDate.getDate() + 3)
     if ((myDate - now) / (1000 * 60 * 60 * 24) < 1) throw new Error('日期選擇錯誤!')
     if (!date.trim() || !quantity) throw new Error('某欄位有誤!')
     Equipment.findByPk(req.params.id)
       .then((equipment) => {
         const { name, category, price } = equipment.toJSON()
-        Promise.all([equipment.decrement('quantity', { by: quantity }), Record.create({ userName, userEmail, userId, date, category, quantity, equipmentName: name, totalPrice: quantity * price })])
+        Promise.all([equipment.decrement('quantity', { by: quantity }), Record.create({ userName, userEmail, userId, date, category, quantity, equipmentName: name, totalPrice: quantity * price, deadline })])
           .then(() => {
             req.flash('success_msg', '租借成功!')
             res.redirect('/equipments/records')

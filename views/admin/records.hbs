@@ -6,12 +6,12 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col" style="left:0;z-index:2;">租借人</th>
-                    <th scope="col">email</th>
                     <th scope="col">器材種類</th>
                     <th scope="col">器材名稱</th>
                     <th scope="col">數量</th>
                     <th scope="col">租借金額</th>
                     <th scope="col">取件日期</th>
+                    <th scope="col">歸還日期</th>
                     <th scope="col">租借狀態</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -22,12 +22,12 @@
                 <tr>
                     <td scope="row"><b>{{this.index}}</b></td>
                     <td style="position:sticky;left:0;z-index:1;background-color:white;">{{this.userName}}</td>
-                    <td>{{this.userEmail}}</td>
                     <td>{{this.category}}</td>
                     <td>{{this.equipmentName}}</td>
                     <td>{{this.quantity}}</td>
                     <td>{{this.totalPrice}}</td>
                     <td>{{this.date}}</td>
+                    <td>{{this.deadline}}</td>
                     <td>
                         <form action="/admin/record/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-link ">
@@ -35,12 +35,18 @@
                             </button>
                         </form>
                     </td>
-                    <td>
-                        <form action="/admin/record/email/{{this.id}}" method="POST" style="display: inline;">
+                    <td class="text-center">
+                        {{#ifCond this.status '已借出'}}
+                        <form action="/admin/record/email/{{../this.id}}" method="POST" style="display: inline;">
                             <button type="submit" class="btn btn-success btn-sm ">
                                 寄出郵件
                             </button>
                         </form>
+                        {{else}}
+                        <button type="submit" class="btn btn-secondary btn-sm ">
+                                寄出郵件
+                        </button>
+                        {{/ifCond}}
                     </td>
                     <td class="text-center">
                         <form action="/admin/record/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
