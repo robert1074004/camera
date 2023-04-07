@@ -5,6 +5,8 @@ const upload = require('../../middleware/multer')
 
 router.post('/record/email/:id', adminController.postEmail)
 
+router.delete('/record/:id', adminController.deleteRecord)
+
 router.get('/records', adminController.getRecords)
 
 router.get('/users', adminController.getUsers)

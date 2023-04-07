@@ -5,7 +5,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col" style="left:0;z-index:2;" >租借人</th>
+                    <th scope="col" style="left:0;z-index:2;">租借人</th>
                     <th scope="col">email</th>
                     <th scope="col">器材種類</th>
                     <th scope="col">器材名稱</th>
@@ -13,6 +13,7 @@
                     <th scope="col">租借金額</th>
                     <th scope="col">取件日期</th>
                     <th scope="col">租借狀態</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,11 +35,20 @@
                             </button>
                         </form>
                     </td>
-                    <td><form action="/admin/record/email/{{this.id}}?_" method="POST" style="display: inline;">
-                            <button type="submit" class="btn btn-danger btn-sm ">
-                               寄出郵件
+                    <td>
+                        <form action="/admin/record/email/{{this.id}}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-success btn-sm ">
+                                寄出郵件
                             </button>
-                        </form></td>
+                        </form>
+                    </td>
+                    <td class="text-center">
+                        <form action="/admin/record/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger btn-sm " onclick="confirm('確定要刪除此記錄?')">
+                                刪除
+                            </button>
+                        </form>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
