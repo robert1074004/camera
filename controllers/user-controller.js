@@ -3,9 +3,7 @@ const { User } = require('../models')
 const userController = {
   SignUpPage: (req, res) => { res.render('sign_up') },
   SignUp: (req, res, next) => {
-    const { name, email, password, confirmPassword } = req.body
-    if (!name || !email || !password || !confirmPassword) throw new Error('所有欄位都是必填資訊!')
-    if (password !== confirmPassword) throw new Error('密碼與確認密碼不相符!')
+    const { name, email, password } = req.body
     User.findOne({ where: { email } })
       .then(user => {
         if (user) throw new Error('此郵件已被註冊成功!')
