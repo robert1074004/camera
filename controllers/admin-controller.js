@@ -19,9 +19,6 @@ const adminController = {
   postEquipment: (req, res, next) => {
     const userId = req.user.id
     const { name, category, price, quantity, description } = req.body
-    if (!name.trim() || !category.trim() || !price.trim() || !quantity.trim()) {
-      throw new Error('Some fields must be required !')
-    }
     const { file } = req
     imgurFileHandler(file)
       .then(filePath => {
@@ -59,9 +56,6 @@ const adminController = {
   putEquipment: (req, res, next) => {
     const userId = req.user.id
     const { name, category, price, quantity, description } = req.body
-    if (!name.trim() || !category.trim() || !price.trim() || !quantity.trim()) {
-      throw new Error('Some fields must be required !')
-    }
     const { file } = req
     Promise.all([Equipment.findByPk(req.params.id), imgurFileHandler(file)])
       .then(([equipment, filePath]) => {
