@@ -17,4 +17,13 @@ const signUpValidator = [body('password').trim().isLength({ min: 5 }).withMessag
 
 const equipmentValidator = [body('category').trim().notEmpty().withMessage('種類不得為空白!'), body('name').trim().notEmpty().withMessage('名子不得為空白!'), body('price').trim().notEmpty().withMessage('價格不得為空白!'), body('quantity').trim().notEmpty().withMessage('數量不得為空白!')]
 
-module.exports = { signUpValidator, equipmentValidator, formError }
+const recordValidator = [body('date').trim().notEmpty().custom((value, { req }) => {
+  if (!value) throw new Error('日期不得為空白!')
+  const now = new Date()
+  const rentDate = new Date(value)
+  if ((rentDate - now) / (1000 * 60 * 60 * 24) < 1) throw new Error('日期選擇錯誤!')
+  req.body.deadline = rentDate.setDate(rentDate.getDate() + 3)
+  return true
+}), body('quantity').trim().notEmpty().withMessage('數量不得為空白!')]
+
+module.exports = { signUpValidator, equipmentValidator, recordValidator, formError }

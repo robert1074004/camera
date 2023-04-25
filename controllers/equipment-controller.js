@@ -22,15 +22,10 @@ const equipmentController = {
       .catch(err => next(err))
   },
   postRecord: (req, res, next) => {
-    const { date, quantity } = req.body
+    const { date, quantity, deadline } = req.body
     const userEmail = req.user.email
     const userName = req.user.name
     const userId = req.user.id
-    const now = new Date()
-    const myDate = new Date(date)
-    const deadline = myDate.setDate(myDate.getDate() + 3)
-    if ((myDate - now) / (1000 * 60 * 60 * 24) < 1) throw new Error('日期選擇錯誤!')
-    if (!date.trim() || !quantity) throw new Error('某欄位有誤!')
     Equipment.findByPk(req.params.id)
       .then((equipment) => {
         const { name, category, price } = equipment.toJSON()
