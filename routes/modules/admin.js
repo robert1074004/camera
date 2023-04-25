@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
 const upload = require('../../middleware/multer')
+const { equipmentValidator, formError } = require('../../middleware/validator')
 
 router.post('/record/email/:id', adminController.postEmail)
 
@@ -23,9 +24,9 @@ router.get('/equipment/:id/edit', adminController.editEquipment)
 
 router.get('/equipment/:id', adminController.getEquipment)
 
-router.post('/equipment', upload.single('image'), adminController.postEquipment)
+router.post('/equipment', upload.single('image'), equipmentValidator, formError, adminController.postEquipment)
 
-router.put('/equipment/:id', upload.single('image'), adminController.putEquipment)
+router.put('/equipment/:id', upload.single('image'), equipmentValidator, formError, adminController.putEquipment)
 
 router.delete('/equipment/:id', adminController.deleteEquipment)
 

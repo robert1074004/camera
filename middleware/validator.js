@@ -15,4 +15,6 @@ const signUpValidator = [body('password').trim().isLength({ min: 5 }).withMessag
   return true
 })]
 
-module.exports = { signUpValidator, formError }
+const equipmentValidator = [body('category').trim().notEmpty().withMessage('種類不得為空白!'), body('name').trim().notEmpty().withMessage('名子不得為空白!'), body('price').trim().notEmpty().withMessage('價格不得為空白!'), body('quantity').trim().notEmpty().withMessage('數量不得為空白!')]
+
+module.exports = { signUpValidator, equipmentValidator, formError }
