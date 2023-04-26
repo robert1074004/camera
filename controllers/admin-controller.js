@@ -133,15 +133,25 @@ const adminController = {
       .catch(err => next(err))
   },
   deleteRecord: (req, res, next) => {
-    Record.findByPk(req.params.id)
-      .then((record) => {
+    Promise.all([Record.findByPk(req.params.id), Equipment.findOne({ where: { name: req.body.equipmentName } })])
+      .then(([record, equipment]) => {
         if (!record) throw new Error("Record didn't exist !")
-        return record.destroy()
+        return Promise.all([record.destroy(), equipment.increment('quantity')])
       })
       .then(() => {
+        req.flash('success_msg', 'Record was deleted successfully!')
         res.redirect('back')
       })
       .catch(err => next(err))
+    // Record.findByPk(req.params.id)
+    //   .then((record) => {
+    //     if (!record) throw new Error("Record didn't exist !")
+    //     return record.destroy()
+    //   })
+    //   .then(() => {
+    //     res.redirect('back')
+    //   })
+    //   .catch(err => next(err))
   },
   postEmail: (req, res, next) => {
     Record.findByPk(req.params.id, { raw: true })

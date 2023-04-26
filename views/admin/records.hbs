@@ -50,6 +50,7 @@
                     </td>
                     <td class="text-center">
                         <form action="/admin/record/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+                            <input type="text" name="equipmentName" value="{{this.equipmentName}}" style="display: none;"> 
                             <button type="submit" class="btn btn-danger btn-sm " onclick="confirm('確定要刪除此記錄?')">
                                 刪除
                             </button>
