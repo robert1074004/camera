@@ -143,15 +143,6 @@ const adminController = {
         res.redirect('back')
       })
       .catch(err => next(err))
-    // Record.findByPk(req.params.id)
-    //   .then((record) => {
-    //     if (!record) throw new Error("Record didn't exist !")
-    //     return record.destroy()
-    //   })
-    //   .then(() => {
-    //     res.redirect('back')
-    //   })
-    //   .catch(err => next(err))
   },
   postEmail: (req, res, next) => {
     Record.findByPk(req.params.id, { raw: true })
