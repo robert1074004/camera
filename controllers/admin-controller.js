@@ -139,7 +139,7 @@ const adminController = {
         return Promise.all([record.destroy(), equipment.increment('quantity')])
       })
       .then(() => {
-        req.flash('success_msg', 'Record was deleted successfully!')
+        req.flash('success_msg', 'Record is successfully deleted !')
         res.redirect('back')
       })
       .catch(err => next(err))
