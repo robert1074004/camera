@@ -40,7 +40,7 @@
       </ul>
     </div>
       {{#if isAuthenticated}}
-      <img src="https://i.imgur.com/rtV3QUi.jpeg" class="border border-white border-2 rounded-circle me-3" style="height: 50px; width:50px;" id="userImg">
+      <img src= {{user.image}} class="border border-white border-2 rounded-circle me-3" style="height: 50px; width:50px;" id="userImg">
       <h5 class="mb-0" id="username" style="color: white;">歡迎，{{ user.name}}</h5>
       {{/if}}
   </div>
