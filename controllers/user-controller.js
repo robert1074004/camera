@@ -36,6 +36,23 @@ const userController = {
     req.flash('success_msg', '成功登出!')
     req.logout()
     res.redirect('/log_in')
+  },
+  editUserPage: (req, res) => {
+    res.render('editUser')
+  },
+  editUser: (req, res, next) => {
+    const { name, password } = req.body
+    const { file } = req
+    return Promise.all([User.findByPk(req.params.id), imgurFileHandler(file), bcrypt.hash(password, 10)])
+      .then(([user, filePath, hash]) => {
+        if (!user) throw new Error('此使者不存在')
+        return user.update({ name, password: hash, image: filePath || user.toJSON().image })
+      })
+      .then(() => {
+        req.flash('success_msg', '使用者資訊修改成功')
+        res.redirect('back')
+      })
+      .catch(err => next(err))
   }
 }
 
