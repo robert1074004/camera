@@ -66,4 +66,5 @@ th:first-child{
 @media screen and (min-width:480px) {#form_panel{width:500px;}}
 @media screen and (max-width:480px) {#login_panel{width:320px;}}
 @media screen and (max-width:480px) {#sign_up_panel{width:320px;}} 
-@media screen and (max-width:480px) {#username{display:none;color:white;}}  
+@media screen and (max-width:480px) {#username{display:none;color:white;}}
+@media screen and (max-width:480px) {#userImg{display:none}}   
