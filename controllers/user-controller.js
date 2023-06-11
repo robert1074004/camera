@@ -1,31 +1,80 @@
 const bcrypt = require('bcryptjs')
 const { imgurFileHandler } = require('../helpers/file-helpers')
+const nodemailer = require('nodemailer')
 const { User } = require('../models')
 const userController = {
-  SignUpPage: (req, res) => { res.render('sign_up') },
+  SignUpPage: (req, res) => {
+    res.render('sign_up')
+  },
   SignUp: (req, res, next) => {
     const { name, email, password } = req.body
     const { file } = req
-    return Promise.all([imgurFileHandler(file), bcrypt.hash(password, 10)])
-      .then(([filePath, hash]) => {
-        return User.findOrCreate({
-          where: { email },
-          defaults: {
-            name,
-            email,
-            password: hash,
-            image: filePath || 'https://i.imgur.com/Qo3mXjE.jpeg'
+    const lower = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    const upper = lower.map(i => i.toUpperCase())
+    const number = '0123456789'.split('')
+    const collection = lower.concat(upper, number)
+    let Numbers = ''
+    return Promise.all([User.findOne({ where: { email } }), bcrypt.hash(password, 10), imgurFileHandler(file)])
+      .then(([user, hash, filePath]) => {
+        if (user) throw new Error('此郵件已被註冊成功!')
+        for (let i = 0; i < 5; i++) {
+          Numbers += collection[Math.floor(Math.random() * collection.length)]
+        }
+        req.session.email = email
+        req.session.password = hash
+        req.session.name = name
+        req.session.filePath = filePath
+        req.session.validation = Numbers
+        return new Promise((resolve, reject) => {
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: process.env.gmail,
+              pass: process.env.gmail_pass
+            },
+            socketTimeout: 60000
+          })
+          const mailOptions = {
+            from: process.env.gmail,
+            to: email,
+            subject: 'TWT器材租借站寄送註冊驗證碼',
+            html: `<p>你的驗證碼是${req.session.validation}，請輸入驗證碼以便註冊</p><a href='https://camera1074004.herokuapp.com/validate'>輸入驗證碼</a>`
           }
+
+          transporter.sendMail(mailOptions, function (err, info) {
+            if (err) {
+              return reject(err)
+            } else {
+              return resolve(info)
+            }
+          })
         })
       })
-      .then(users => {
-        if (!users[1]) throw new Error('此郵件已被註冊成功!')
+      .then((info) => {
+        req.flash('success_msg', '以寄送驗證碼到你的郵件')
+        res.redirect('/validate')
+      })
+      .catch(err => next(err))
+  },
+  validatePage: (req, res) => {
+    console.log(req.sessionID)
+    res.render('validatePage')
+  },
+  validate: (req, res, next) => {
+    const { validation, name, email, password, filePath } = req.session
+    if (validation !== req.body.validation) {
+      throw new Error('驗證碼輸入錯誤!')
+    }
+    return User.create({ name, email, password, image: filePath || 'https://i.imgur.com/Qo3mXjE.jpeg' })
+      .then(() => {
+        req.session.destroy()
         req.flash('success_msg', '註冊成功!')
         res.redirect('/log_in')
       })
       .catch(err => next(err))
   },
   logInPage: (req, res) => {
+    console.log(req.sessionID)
     res.render('log_in')
   },
   logIn: (req, res) => {
