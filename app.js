@@ -10,7 +10,6 @@ const passport = require('./config/passport')
 const { getUser } = require('./helpers/auth-helper')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const app = express()
-const SESSION_SECRET = 'secret'
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -20,7 +19,7 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs', helpers: hand
 app.set('view engine', 'hbs')
 
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
