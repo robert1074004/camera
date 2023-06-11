@@ -51,13 +51,12 @@ const userController = {
         })
       })
       .then((info) => {
-        req.flash('success_msg', '以寄送驗證碼到你的郵件')
+        req.flash('success_msg', '已寄送驗證碼到你的郵件')
         res.redirect('/validate')
       })
       .catch(err => next(err))
   },
   validatePage: (req, res) => {
-    console.log(req.sessionID)
     res.render('validatePage')
   },
   validate: (req, res, next) => {
@@ -67,14 +66,13 @@ const userController = {
     }
     return User.create({ name, email, password, image: filePath || 'https://i.imgur.com/Qo3mXjE.jpeg' })
       .then(() => {
-        req.session.destroy()
         req.flash('success_msg', '註冊成功!')
+        req.session.destroy()
         res.redirect('/log_in')
       })
       .catch(err => next(err))
   },
   logInPage: (req, res) => {
-    console.log(req.sessionID)
     res.render('log_in')
   },
   logIn: (req, res) => {
