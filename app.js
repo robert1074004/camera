@@ -21,7 +21,8 @@ app.set('view engine', 'hbs')
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { _expires: 86400000 }
 }))
 
 app.use(express.static('public'))
