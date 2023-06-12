@@ -20,11 +20,7 @@ const userController = {
         for (let i = 0; i < 5; i++) {
           Numbers += collection[Math.floor(Math.random() * collection.length)]
         }
-        req.session.email = email
-        req.session.password = hash
-        req.session.name = name
-        req.session.filePath = filePath
-        req.session.validation = Numbers
+        req.session.validator = { email, password: hash, name, filePath, validation: Numbers }
         return new Promise((resolve, reject) => {
           const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -38,7 +34,7 @@ const userController = {
             from: process.env.gmail,
             to: email,
             subject: 'TWT器材租借站寄送註冊驗證碼',
-            html: `<p>你的驗證碼是${req.session.validation}，請輸入驗證碼以便註冊</p><a href='https://camera1074004.herokuapp.com/validate'>輸入驗證碼</a>`
+            html: `<p>你的驗證碼是${req.session.validator.validation}，請輸入驗證碼以便註冊</p><a href='https://camera1074004.herokuapp.com/validate'>輸入驗證碼</a>`
           }
 
           transporter.sendMail(mailOptions, function (err, info) {
@@ -60,14 +56,14 @@ const userController = {
     res.render('validatePage')
   },
   validate: (req, res, next) => {
-    const { validation, name, email, password, filePath } = req.session
+    const { validation, name, email, password, filePath } = req.session.validator
     if (validation !== req.body.validation) {
       throw new Error('驗證碼輸入錯誤!')
     }
     return User.create({ name, email, password, image: filePath || 'https://i.imgur.com/Qo3mXjE.jpeg' })
       .then(() => {
+        delete req.session.validator
         req.flash('success_msg', '註冊成功!')
-        req.session.destroy()
         res.redirect('/log_in')
       })
       .catch(err => next(err))
