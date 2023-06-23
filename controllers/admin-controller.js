@@ -148,23 +148,22 @@ const adminController = {
     Record.findByPk(req.params.id, { raw: true })
       .then((record) => {
         if (!record) throw new Error("Record didn't exist !")
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.gmail,
+            pass: process.env.gmail_pass
+          },
+          socketTimeout: 60000
+        })
+
+        const mailOptions = {
+          from: process.env.gmail,
+          to: record.userEmail,
+          subject: `你租借的器材${record.equipmentName}已到期，請盡速歸還`,
+          html: `<p>你租借的器材${record.equipmentName}已到期，請盡速歸還，詳情請先登入帳號查看</p><a href='https://camera1074004.herokuapp.com/equipments/SLRcamera'>官方網站</a>`
+        }
         return new Promise((resolve, reject) => {
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: process.env.gmail,
-              pass: process.env.gmail_pass
-            },
-            socketTimeout: 60000
-          })
-
-          const mailOptions = {
-            from: process.env.gmail,
-            to: record.userEmail,
-            subject: `你租借的器材${record.equipmentName}已到期，請盡速歸還`,
-            html: `<p>你租借的器材${record.equipmentName}已到期，請盡速歸還，詳情請先登入帳號查看</p><a href='https://camera1074004.herokuapp.com/equipments/SLRcamera'>官方網站</a>`
-          }
-
           transporter.sendMail(mailOptions, function (err, info) {
             if (err) {
               return reject(err)

@@ -21,22 +21,22 @@ const userController = {
           Numbers += collection[Math.floor(Math.random() * collection.length)]
         }
         req.session.validator = { email, password: hash, name, filePath, validation: Numbers }
-        return new Promise((resolve, reject) => {
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: process.env.gmail,
-              pass: process.env.gmail_pass
-            },
-            socketTimeout: 60000
-          })
-          const mailOptions = {
-            from: process.env.gmail,
-            to: email,
-            subject: 'TWT器材租借站寄送註冊驗證碼',
-            html: `<p>你的驗證碼是${req.session.validator.validation}，請在一天內輸入驗證碼以便註冊</p><a href='https://camera1074004.herokuapp.com/validate'>輸入驗證碼</a>`
-          }
 
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.gmail,
+            pass: process.env.gmail_pass
+          },
+          socketTimeout: 60000
+        })
+        const mailOptions = {
+          from: process.env.gmail,
+          to: email,
+          subject: 'TWT器材租借站寄送註冊驗證碼',
+          html: `<p>你的驗證碼是${req.session.validator.validation}，請在一天內輸入驗證碼以便註冊</p><a href='https://camera1074004.herokuapp.com/validate'>輸入驗證碼</a>`
+        }
+        return new Promise((resolve, reject) => {
           transporter.sendMail(mailOptions, function (err, info) {
             if (err) {
               return reject(err)
