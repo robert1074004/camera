@@ -33,4 +33,6 @@ const recordValidator = [body('date').trim().notEmpty().custom((value, { req }) 
   return true
 }), body('quantity').trim().notEmpty().withMessage('數量不得為空白!')]
 
-module.exports = { signUpValidator, equipmentValidator, recordValidator, editUserValidator, formError }
+const logInValidator = [body('email').trim().notEmpty().withMessage('電子郵件不得為空白!'), body('password').trim().notEmpty().withMessage('密碼不得為空白!')]
+
+module.exports = { signUpValidator, equipmentValidator, recordValidator, editUserValidator, logInValidator, formError }
