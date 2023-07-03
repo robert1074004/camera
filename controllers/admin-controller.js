@@ -1,6 +1,7 @@
 const { User, Equipment, Record } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
 const nodemailer = require('nodemailer')
+const { Op } = require('sequelize')
 const adminController = {
   getEquipments: (req, res, next) => {
     const category = req.query.category
@@ -81,13 +82,14 @@ const adminController = {
       })
   },
   getUsers: (req, res, next) => {
-    User.findAll({ raw: true })
+    const email = req.query.email?.trim() || ''
+    User.findAll({ where: { email: { [Op.substring]: email } }, raw: true })
       .then((users) => {
         users = users.map(user => ({
           ...user,
           index: users.indexOf(user) + 1
         }))
-        res.render('admin/users', { users })
+        res.render('admin/users', { users, email })
       })
       .catch(err => next(err))
   },
@@ -108,13 +110,14 @@ const adminController = {
       .catch(err => next(err))
   },
   getRecords: (req, res, next) => {
-    Record.findAll({ raw: true })
+    const email = req.query.email?.trim() || ''
+    Record.findAll({ where: { userEmail: { [Op.substring]: email } }, raw: true })
       .then((records) => {
         records = records.map(record => ({
           ...record,
           index: records.indexOf(record) + 1
         }))
-        res.render('admin/records', { records })
+        res.render('admin/records', { records, email })
       })
       .catch(err => next(err))
   },
