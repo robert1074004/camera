@@ -4,7 +4,19 @@
     <a href='/admin/equipment/create'>
       <button type="button" class="btn btn-primary">New Equipment</button>
     </a>
+
+    <div class="btn-group ms-3">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Category
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item" href="?category=SLRcamera">SLRcamera</a></li>
+        <li><a class="dropdown-item" href="?category=camera">camera</a></li>
+        <li><a class="dropdown-item" href="?category=cameratripod">cameratripod</a></li>
+      </ul>
+    </div>
   </div>
+
   <div style="max-height:400px; width:100%; overflow: auto;" class="mx-auto border border-3 border-dark">
     <table class=" mb-0" style="background-color: white;" id="equipment_table">
       <thead class="thead-dark">
@@ -18,7 +30,8 @@
         {{#each equipments}}
         <tr>
           <td scope="row"><b>{{this.index}}</b></td>
-          <td style="position:sticky;left:0;z-index:1;background-color:white;"><b style="font-size:16px;">{{this.name}}</b></td>
+          <td style="position:sticky;left:0;z-index:1;background-color:white;"><b
+              style="font-size:16px;">{{this.name}}</b></td>
           <td>
             <button type="button" class="btn btn-link">
               <a class="btn btn-link link-primary" href="/admin/equipment/{{this.id}}">
@@ -31,7 +44,8 @@
               </a>
             </button>
             <form action="/admin/equipment/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-              <button type="submit" class="btn btn-link link-danger" onclick="return confirm('確定要刪除此器材')">Delete</button>
+              <button type="submit" class="btn btn-link link-danger"
+                onclick="return confirm('確定要刪除此器材')">Delete</button>
             </form>
           </td>
         </tr>

@@ -3,7 +3,8 @@ const { imgurFileHandler } = require('../helpers/file-helpers')
 const nodemailer = require('nodemailer')
 const adminController = {
   getEquipments: (req, res, next) => {
-    Equipment.findAll({ raw: true })
+    const category = req.query.category
+    Equipment.findAll({ where: { ...category ? { category } : {} }, raw: true })
       .then(equipments => {
         equipments = equipments.map(equipment => ({
           ...equipment,
