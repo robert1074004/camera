@@ -4,6 +4,10 @@ const router = express.Router()
 const equipmentController = require('../../controllers/equipment-controller')
 const { recordValidator, formError } = require('../../middleware/validator')
 
+router.get('/addEvent', equipmentController.addEvent)
+
+router.get('/calendar/callback', equipmentController.callback)
+
 router.get('/records', equipmentController.getRecords)
 
 router.get('/:category', equipmentController.getCategories)

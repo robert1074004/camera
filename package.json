@@ -34,6 +34,8 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.17.1",
     "express-validator": "^7.0.1",
+    "google-auth-library": "^7.14.1",
+    "googleapis": "^105.0.0",
     "imgur": "^1.0.2",
     "method-override": "^3.0.0",
     "multer": "^1.4.3",

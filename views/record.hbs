@@ -9,8 +9,9 @@
             <h6>租借器材 : {{this.equipmentName}}</h6>
             <p class="my-2">租借數量 : {{this.quantity}}</p>
             <p class="my-2">請依預借日期前往實體店面租借</p>
-            <small>預借日期: {{this.date}}</small>
+            <small>預借日期: {{this.date}} | 歸還日期: {{this.deadline}}</small>
             <p class="my-2"><strong>器材現況: {{this.status}}</strong></p>
+            <a href="/equipments/addEvent?rentDay={{this.date}}&backDay={{this.deadline}}" class="btn btn-success">加入Google Calendar</a>
         </div>
         {{/each}}
 

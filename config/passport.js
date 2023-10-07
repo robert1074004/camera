@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: 'https://camera1074004.herokuapp.com/google/callback',
+  callbackURL: process.env.GOOGLE_CALLBACK_URL,
   passReqToCallback: true
 }, (req, accessToken, refreshToken, profile, done) => {
   const data = profile._json
@@ -55,6 +55,8 @@ passport.deserializeUser((id, done) => {
   User.findByPk(id)
     .then(user => {
       user = user.toJSON()
+      delete user.password
+      delete user.refreshToken
       done(null, user)
     })
     .catch(err => done(err, false))
