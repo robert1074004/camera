@@ -144,12 +144,10 @@ const equipmentController = {
     return Promise.all([oauth2Client.getToken(authorizationCode), User.findByPk(req.user.id)])
       .then(([token, user]) => {
         if (!user) throw new Error("User didn't exist !")
-        console.log('token', token)
         oauth2Client.setCredentials(token.tokens)
         return user.update({ refreshToken: token.tokens.refresh_token })
       })
       .then(user => {
-        console.log('user', user.toJSON())
         const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
         const Event = req.session.calendar
         return Promise.all([calendar.events.insert({
