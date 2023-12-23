@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "root",
-    "password": "password",
+    "username": "robert",
+    "password": "dbPassword",
     "database": "camera",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,6 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "CLEARDB_DATABASE_URL"
+    "username": "robert",
+    "password": "dbPassword",
+    "database": "camera",
+    "host": "camera-sql.internal", 
+    "dialect": "mysql"
   }
 }

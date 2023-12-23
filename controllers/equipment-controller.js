@@ -49,7 +49,7 @@ const equipmentController = {
   },
   addEvent: (req, res, next) => {
     const { rentDay, backDay } = req.query
-    req.session.calendar = [{ summary: 'TWT預借器材提醒', description: "你有器材需要今天到場租借，請到官網確認租借器材<br><a href = 'https://camera1074004.herokuapp.com/equipments/records'>官網網址</a>", date: rentDay, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }, { summary: 'TWT歸還器材提醒', description: "你有器材需要今天到場歸還，請到官網確認租借器材<br><a href = 'https://camera1074004.herokuapp.com/equipments/records'>官網網址</a>", date: backDay, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }]
+    req.session.calendar = [{ summary: 'TWT預借器材提醒', description: "你有器材需要今天到場租借，請到官網確認租借器材<br><a href = 'https://camera.fly.dev/equipments/records'>官網網址</a>", date: rentDay, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }, { summary: 'TWT歸還器材提醒', description: "你有器材需要今天到場歸還，請到官網確認租借器材<br><a href = 'https://camera.fly.dev/equipments/records'>官網網址</a>", date: backDay, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }]
     const oauth2Client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.CALENDAR_CALLBACK_URL)
     return User.findByPk(req.user.id, { raw: true })
       .then(user => {

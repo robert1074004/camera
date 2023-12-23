@@ -165,7 +165,7 @@ const adminController = {
           from: process.env.gmail,
           to: record.userEmail,
           subject: `你租借的器材${record.equipmentName}已到期，請盡速歸還`,
-          html: `<p>你租借的器材${record.equipmentName}已到期，請盡速歸還，詳情請先登入帳號查看</p><a href='https://camera1074004.herokuapp.com/equipments/SLRcamera'>官方網站</a>`
+          html: `<p>你租借的器材${record.equipmentName}已到期，請盡速歸還，詳情請先登入帳號查看</p><a href='https://camera.fly.dev/equipments/records'>官方網站</a>`
         }
         return new Promise((resolve, reject) => {
           transporter.sendMail(mailOptions, function (err, info) {
