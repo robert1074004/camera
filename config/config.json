@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "dbPassword",
     "database": "camera",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -15,9 +15,9 @@
   },
   "production": {
     "username": "robert",
-    "password": "",
+    "password": "dbPassword",
     "database": "camera",
-    "host": "127.0.0.1", 
+    "host": "camera-sql.internal", 
     "dialect": "mysql"
   }
 }
