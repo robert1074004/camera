@@ -37,8 +37,6 @@ th {
 }
 td, th {
     border:1px solid gray;
-    width: 30px;
-    height: 20px;
 }
 
 td:first-child, th:first-child {
@@ -46,6 +44,8 @@ td:first-child, th:first-child {
     left:0;
     z-index:1;
     background-color: lightpink;
+    width:30px;
+    text-align: center;
 }
 thead tr th {
     position:sticky;
@@ -58,7 +58,7 @@ th:first-child{
 
 
 @media screen and (min-width:480px) {#record_panel{width:500px;}}
-@media screen and (min-width:480px) {#records_panel{width:1500px;}}  
+@media screen and (min-width:480px) {#records_panel{width:1000px;}}  
 @media screen and (min-width:480px) {#equipments_panel{width:650px;}} 
 @media screen and (min-width:480px) {#camera_panel{display:flex;flex-direction:row;justify-content:center;width:800px;height:550px;}}
 @media screen and (min-width:480px) {#category_panel{width:600px;}}

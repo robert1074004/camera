@@ -6,8 +6,8 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col" style="left:0;z-index:2;">Name</th>
-          <th scope="col">Email</th>
+          <th scope="col" style="left:0;z-index:2;">Email</th>
+          <th scope="col" >Name</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -15,9 +15,9 @@
         {{#each users}}
         <tr>
           <td scope="row"><b>{{this.index}}</b></td>
-          <td style="position:sticky;left:0;z-index:1;background-color:white;"><b style="font-size:16px;">{{this.name}}</b></td>
-          <td><b style="font-size:16px;">{{this.email}}</b></td>
-          <td>
+          <td style="position:sticky;left:0;z-index:1;background-color:white;width:280px;"><b style="font-size:16px;">{{this.email}}</b></td>
+           <td><b style="font-size:16px;">{{this.name}}</b></td>
+          <td style="width: 150px;">
             <form action="/admin/user/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
               <button type="submit" class="btn btn-link ">
                 {{#if this.isAdmin}} set as user {{else}} set as admin {{/if}}
