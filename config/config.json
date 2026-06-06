@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "robert",
+    "username": "root",
     "password": "dbPassword",
     "database": "camera",
-    "host": "camera-sql.internal", 
+    "host": "robert-database.internal", 
     "dialect": "mysql"
   }
 }
